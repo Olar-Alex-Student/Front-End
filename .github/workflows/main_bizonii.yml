@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'Bizonii'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7C7971E90BB54AA599E42AA3BE8F336C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A2AC3087B7E14B228703AF8DD73633A6 }}
           package: .
