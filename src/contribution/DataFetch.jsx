@@ -1,20 +1,30 @@
-import React, {useEffect, useState} from 'react'
+/*import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 
 function DataFetch() {
     const [post, setPost] = useState({})
     const [id, setID] = useState()
     const [idButton, setButton] = useState()
+    const [user, setUser] = useState({})
 
     const pressClick = () => {
         setButton(id)
     }
 
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb2dnZXJzMTIzNEBwb2dtYWlsLmNvbSIsImV4cCI6MTY3Nzk0NzUwOX0.fRzSWgr8iHw2IktDYmsGzU23Q4jHLUztVhDGOhURyb4"
+        }
+    };
+    
+
     useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/posts/${idButton}`)
+        console.log(idButton)
+        axios.get(`https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${idButton}`,config)
             .then(res => {
                 console.log(res)
-                setPost(res.data)
+                setUser(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -29,21 +39,75 @@ function DataFetch() {
             <button type='button' onClick={pressClick}>Request API</button>
             <h2>
                 {
-                    post.title
+                    user.nume
                 }
             </h2>
             <p>
                 {
-                    post.body
+                    user.email
                 }
             </p>
             {/* <ul>
                 {
                     post.map(post => <li key={post.id}>{post.title}</li>)
                 }
-            </ul> */}
+            </ul> *}
         </div>
     )
 }
 
-export default DataFetch
+export default DataFetch*/
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const API_URL = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/users/c6c1b8ae-44cd-4e83-a5f9-d6bbc8eeebcf';
+const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb2dnZXJzMTIzNEBwb2dtYWlsLmNvbSIsImV4cCI6MTY3Nzk0NzUwOX0.fRzSWgr8iHw2IktDYmsGzU23Q4jHLUztVhDGOhURyb4';
+
+function DataFetch() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`${API_URL}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${API_TOKEN}`
+          }
+        });
+        setData(response.data);
+        console.log("response")
+        console.log(response)
+        setError(null);
+      } catch (error) {
+        setError(error);
+        setData(null);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error.message}</p>
+      ) : data ? (
+        <ul>
+          {data.map(item => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No data to display</p>
+      )}
+    </div>
+  );
+}
+
+export default DataFetch;
