@@ -2,6 +2,8 @@ import { useState } from 'react'
 import logo from "./images/bison_logo.png"
 import './css/App.css'
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import {Navbar, Nav, Button} from 'react-bootstrap';
+import DataFetch from './contribution/DataFetch';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -54,6 +56,7 @@ function App() {
           </div>
         </div>
       </div>
+      <DataFetch/>
     </div>
   )
 }
