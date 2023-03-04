@@ -1,5 +1,6 @@
 $primary: #916540;
 $secondary: #E4E5E9;
+$dark: #312B2B;
 
 @import "~/bootstrap/scss/bootstrap";
 
@@ -20,6 +21,7 @@ $secondary: #E4E5E9;
   background-attachment: fixed;
   height: 100vh;
   width: 100vw;
+  padding: 20px;
 }
 
 .nav {
@@ -45,8 +47,9 @@ $secondary: #E4E5E9;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+  margin: -20px;
 }
 
 .toggle-button {
@@ -61,6 +64,7 @@ $secondary: #E4E5E9;
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.2);
   }
