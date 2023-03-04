@@ -21,30 +21,30 @@ function App() {
       <div className="container">
         <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
           <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary fw-bold'>
+            <Nav.Link href="#" className='text-secondary rounded-pill fw-bold'>
               <img src={logo} width="46" height="46"
                 className="rounded-pill d-inline-block align-top mx-2" alt="" />
               Bizonii</Nav.Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary rounded-pill active'>Home</Nav.Link>
+            <Nav.Link href="/home" className='text-secondary rounded-pill'>Home</Nav.Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>History</Nav.Link>
+            <Nav.Link href="/history" className='text-secondary rounded-pill'>History</Nav.Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>Forms</Nav.Link>
+            <Nav.Link href="/forms" className='text-secondary rounded-pill'>Forms</Nav.Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>Upgrade</Nav.Link>
+            <Nav.Link href="/upgrade" className='text-secondary rounded-pill'>Upgrade</Nav.Link>
           </Nav.Item>
 
           <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>Login</Nav.Link>
+            <Nav.Link href="/login" className='text-secondary rounded-pill'>Login</Nav.Link>
           </Nav.Item>
         </Nav>
       </div>
