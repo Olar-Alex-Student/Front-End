@@ -9,15 +9,6 @@ function App() {
 
   return (
     <div className="App">
-      {
-        toggle ?
-          <div className="container-toggle-button">
-            <button type="button" className="toggle-button" onClick={() => { setToggle(false) }}>
-              <img src={logo} width="150" height="150"
-                className="toggler-image rounded-pill" alt="" />
-            </button>
-          </div> : null
-      }
       <div className="container">
         <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
           <Nav.Item>
@@ -48,6 +39,15 @@ function App() {
           </Nav.Item>
         </Nav>
       </div>
+      {
+        toggle ?
+          <div className="container-toggle-button">
+            <button type="button" className="toggle-button" onClick={() => { setToggle(false) }}>
+              <img src={logo} width="150" height="150"
+                className="toggler-image rounded-pill" alt="" />
+            </button>
+          </div> : null
+      }
       {
         !toggle ?
           <div className="container d-flex justify-content-center p-4">
