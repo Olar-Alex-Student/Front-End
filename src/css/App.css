@@ -10846,8 +10846,8 @@ textarea.form-control-lg {
   position: absolute;
 }
 
-body {
-  background-image: url("../../Design/Design 1/images/bison snow.jpg");
+.App {
+  background-image: url("../images/bison snow.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
