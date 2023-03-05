@@ -57,6 +57,7 @@ function DataFetch() {
 }
 
 export default DataFetch*/
+/*
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -64,6 +65,7 @@ const API_URL = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/users/c6c1
 const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb2dnZXJzMTIzNEBwb2dtYWlsLmNvbSIsImV4cCI6MTY3Nzk0NzUwOX0.fRzSWgr8iHw2IktDYmsGzU23Q4jHLUztVhDGOhURyb4';
 
 function DataFetch() {
+  const [user, setUser] = useState(null);
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -71,6 +73,7 @@ function DataFetch() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
+      console.log("response1")
       try {
         const response = await axios.get(`${API_URL}`, {
           headers: {
@@ -79,8 +82,7 @@ function DataFetch() {
           }
         });
         setData(response.data);
-        console.log("response")
-        console.log(response)
+        console.log("response2")
         setError(null);
       } catch (error) {
         setError(error);
@@ -99,8 +101,8 @@ function DataFetch() {
         <p>{error.message}</p>
       ) : data ? (
         <ul>
-          {data.map(item => (
-            <li key={item.id}>{item.name}</li>
+          {data.map(user => (
+            <li key={user.id}>{user.name}</li>
           ))}
         </ul>
       ) : (
@@ -111,3 +113,42 @@ function DataFetch() {
 }
 
 export default DataFetch;
+*/
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+function DataFetch() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://bizoni-backend-apis.azurewebsites.net/api/v1/users/c6c1b8ae-44cd-4e83-a5f9-d6bbc8eeebcf', {
+          headers: {
+            Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb2dnZXJzMTIzNEBwb2dtYWlsLmNvbSIsImV4cCI6MTY3Nzk0NzUwOX0.fRzSWgr8iHw2IktDYmsGzU23Q4jHLUztVhDGOhURyb4',
+          },
+        });
+        setData(response.data);
+        console.log("Data is fetch")
+      } catch (error) {
+        setError(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) {
+    return <div>An error occurred: {error.message}</div>;
+  }
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  return <div>{useReducer.name}</div>;
+}
+
+export default DataFetch;
+
