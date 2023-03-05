@@ -24,23 +24,23 @@ function App() {
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill'>Home</Nav.Link>
+              <Nav.Link as={Link} to={'/'} eventKey="Home" className='text-secondary rounded-pill'>Home</Nav.Link>
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link as={Link} to={'/history'} className='text-secondary rounded-pill'>History</Nav.Link>
+              <Nav.Link as={Link} to={'/history'} eventKey="History" className='text-secondary rounded-pill'>History</Nav.Link>
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link as={Link} to={'/forms'} className='text-secondary rounded-pill'>Forms</Nav.Link>
+              <Nav.Link as={Link} to={'/forms'} eventKey="Forms" className='text-secondary rounded-pill'>Forms</Nav.Link>
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link as={Link} to={'/upgrade'} className='text-secondary rounded-pill'>Upgrade</Nav.Link>
+              <Nav.Link as={Link} to={'/upgrade'} eventKey="Upgrade" className='text-secondary rounded-pill'>Upgrade</Nav.Link>
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link as={Link} to={'/login'} className='text-secondary rounded-pill'>Login</Nav.Link>
+              <Nav.Link as={Link} to={'/login'} eventKey="Login" className='text-secondary rounded-pill'>Login</Nav.Link>
             </Nav.Item>
           </Nav>
         </Container>
