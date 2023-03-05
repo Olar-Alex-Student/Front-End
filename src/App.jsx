@@ -17,7 +17,7 @@ function App() {
         <Container>
           <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
             <Nav.Item>
-              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold'>
+              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold disabled'>
                 <img src={logo} width="46" height="46"
                   className="rounded-pill d-inline-block align-top mx-2" alt="" />
                 Bizonii</Nav.Link>
