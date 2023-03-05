@@ -8,6 +8,7 @@ import { History } from './components/History'
 import { Forms } from './components/Forms'
 import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
+import { Signup } from './components/Signup'
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
             <Route path='/forms' element={<Forms />}></Route>
             <Route path='/upgrade' element={<Upgrade />}></Route>
             <Route path='/login' element={<Login />}></Route>
+            <Route path='/signup' element={<Signup />}></Route>
           </Routes>
       </BrowserRouter >
     </div>
