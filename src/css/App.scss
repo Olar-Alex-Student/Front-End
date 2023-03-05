@@ -4,6 +4,10 @@ $dark: #312B2B;
 
 @import "~/bootstrap/scss/bootstrap";
 
+*{
+  box-sizing: border-box;
+}
+
 .box {
   width: 700px;
   border-radius: 100px;
@@ -16,6 +20,8 @@ $dark: #312B2B;
 }
 
 .App {
+  display: flex;
+  flex-flow: column;
   background-image: url('../images/bison snow.jpg');
   background-size: cover;
   background-attachment: fixed;
@@ -43,13 +49,10 @@ $dark: #312B2B;
 }
 
 .container-toggle-button {
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
-  margin: -20px;
+  flex-grow : 1;
 }
 
 .toggle-button {

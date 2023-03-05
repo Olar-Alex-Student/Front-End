@@ -10819,6 +10819,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+* {
+  box-sizing: border-box;
+}
+
 .box {
   width: 700px;
   border-radius: 100px;
@@ -10831,6 +10835,8 @@ textarea.form-control-lg {
 }
 
 .App {
+  display: flex;
+  flex-flow: column;
   background-image: url("../images/bison snow.jpg");
   background-size: cover;
   background-attachment: fixed;
@@ -10858,13 +10864,10 @@ textarea.form-control-lg {
 }
 
 .container-toggle-button {
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
-  margin: -20px;
+  flex-grow: 1;
 }
 
 .toggle-button {
