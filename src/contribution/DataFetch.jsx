@@ -3,8 +3,7 @@ import axios from 'axios';
 
 const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 const id = "e68ce6d0-a595-4312-b088-22c7a6282d73";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZXJkc2FmZXJhZHNlcmFkQHBvZ21haWwuY29tIiwiZXhwIjoxNjc4MDQ2NTE2fQ.vMLZM5SmbtwicWyM9VJ7eYZLO_xx_StbWSiF8LupglU";  
-
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb2dnZXJzMTIzNEBwb2dtYWlsLmNvbSIsImV4cCI6MTY3ODA1MTg2NH0.0B-nZl4HFgxhzzR_6z7a_WSavcI5yRHBigeBdIAWU90";
 function DataFetch() {
   const [user, setUser] = useState({})
 
