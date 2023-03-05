@@ -9,6 +9,7 @@ import { Forms } from './components/Forms'
 import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
+import DataFetch from './contribution/DataFetch';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
             <Route path='/signup' element={<Signup />}></Route>
           </Routes>
       </BrowserRouter >
+      <DataFetch/>
     </div>
   )
 }
