@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import logo from "./images/bison_logo.png"
 import './css/App.css'
-import { Navbar, Nav, Button, Container } from 'react-bootstrap';
+import { Navbar, Nav, Button, Container, Form } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route, BrowserRouter, Link, RouterProvider } from 'react-router-dom';
 import { Home } from './components/Home'
 import { History } from './components/History'
@@ -9,7 +10,8 @@ import { Forms } from './components/Forms'
 import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
-import DataFetch from './contribution/DataFetch';
+import { DataFetch } from './components/DataFetch'
+import { DataFetch2 } from './components/DataFetch2'
 
 function App() {
 
@@ -46,16 +48,15 @@ function App() {
             </Nav.Item>
           </Nav>
         </Container>
-          <Routes>
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/history' element={<History />}></Route>
-            <Route path='/forms' element={<Forms />}></Route>
-            <Route path='/upgrade' element={<Upgrade />}></Route>
-            <Route path='/login' element={<Login />}></Route>
-            <Route path='/signup' element={<Signup />}></Route>
-          </Routes>
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/history' element={<History />}></Route>
+          <Route path='/forms' element={<> <Forms /> <DataFetch /> <DataFetch2 /> </>}></Route>
+          <Route path='/upgrade' element={<Upgrade />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/signup' element={<Signup />}></Route>
+        </Routes>
       </BrowserRouter >
-      <DataFetch/>
     </div>
   )
 }
