@@ -15,7 +15,7 @@ function DataFetch() {
         "X-Requested-With": "XMLHttpRequest"
        }
     };
-    axios.get(`https://cors-anywhere.herokuapp.com/https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}`,config)
+    axios.get(`${CORS_PROXY}https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}`,config)
         .then(res => {
             console.log(res)
             setUser(res.data)
