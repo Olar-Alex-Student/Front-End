@@ -1,70 +1,57 @@
 import React, { useState } from 'react'
 import logo from "./images/bison_logo.png"
 import './css/App.css'
-import './App.css'
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav, Button, Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import { Home } from './components/Home'
+import { History } from './components/History'
+import { Forms } from './components/Forms'
+import { Upgrade } from './components/Upgrade'
+import { Login } from './components/Login'
 
 function App() {
-  const [toggle, setToggle] = useState(true)
 
   return (
     <div className="App">
-      {
-        toggle ?
-          <div className="container-toggle-button">
-            <button type="button" className="toggle-button" onClick={() => { setToggle(false) }}>
-              <img src={logo} width="150" height="150"
-                className="toggler-image rounded-pill" alt="" />
-            </button>
-          </div> : null
-      }
-      <div className="container">
-        <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
-          <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary fw-bold'>
-              <img src={logo} width="46" height="46"
-                className="rounded-pill d-inline-block align-top mx-2" alt="" />
-              Bizonii</Nav.Link>
-          </Nav.Item>
+      <BrowserRouter>
+        <Container>
+          <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold disabled'>
+                <img src={logo} width="46" height="46"
+                  className="rounded-pill d-inline-block align-top mx-2" alt="" />
+                Bizonii</Nav.Link>
+            </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary rounded-pill active'>Home</Nav.Link>
-          </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill'>Home</Nav.Link>
+            </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>History</Nav.Link>
-          </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/history'} className='text-secondary rounded-pill'>History</Nav.Link>
+            </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>Forms</Nav.Link>
-          </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/forms'} className='text-secondary rounded-pill'>Forms</Nav.Link>
+            </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>Upgrade</Nav.Link>
-          </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/upgrade'} className='text-secondary rounded-pill'>Upgrade</Nav.Link>
+            </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link href="#/link" className='text-secondary'>Login</Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </div>
-      {
-        !toggle ?
-          <div className="container d-flex justify-content-center p-4">
-            <div className="box bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
-              <div className="title text-dark fw-bold">
-                <span>Forms</span>
-              </div>
-              <p className="text-center text-secondary fs-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia
-                similique nihil, soluta nulla ratione minus modi nostrum dicta illo obcaecati, necessitatibus rem,
-                odit voluptate. Quod, consequatur repellat! Eligendi, et numquam!</p>
-              <div className="buttons d-flex gap-5">
-                <Button className="rounded-pill fw-bold">Login</Button>
-                <Button className="rounded-pill fw-bold">Sign Up</Button>
-              </div>
-            </div>
-          </div> : null
-      }
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/login'} className='text-secondary rounded-pill'>Login</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Container>
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/history' element={<History />}></Route>
+            <Route path='/forms' element={<Forms />}></Route>
+            <Route path='/upgrade' element={<Upgrade />}></Route>
+            <Route path='/login' element={<Login />}></Route>
+          </Routes>
+      </BrowserRouter >
     </div>
   )
 }
