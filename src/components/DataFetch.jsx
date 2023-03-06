@@ -2,41 +2,46 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export const DataFetch = () => {
-  const [user, setUser] = useState({})
-  const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-  const id = "e68ce6d0-a595-4312-b088-22c7a6282d73";
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb2dnZXJzMTIzNEBwb2dtYWlsLmNvbSIsImV4cCI6MTY3ODA1MTg2NH0.0B-nZl4HFgxhzzR_6z7a_WSavcI5yRHBigeBdIAWU90";
+  const [userData, setUserData] = useState(null);
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJib3Nhc2RkYXNzMTIzNEBnbWFpbC5jb20iLCJleHAiOjE2NzgxMTI1MTF9.pkEEKH6aY9emP1z9qJJbDgUljHKad0TydJc1KqBaesw';
+  const headers = { Authorization: `Bearer ${token}` };
+  const url = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/";
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const config = {
-      headers: { 
-        Authorization: `Bearer ${token}`,
-        "Access-Control-Allow-Origin": `${CORS_PROXY}`,
-        "X-Requested-With": "XMLHttpRequest"
-       }
-    };
-    axios.get(`${CORS_PROXY}https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}`,config)
-        .then(res => {
-            console.log(res)
-            setUser(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-}, [id, token])
-return(
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(url, {
+        "name": "Cont Smasddasecher",
+        "email": "bosasddass1234@gmail.com",
+        "password": "paasdadsrola",
+        "account_type": "individual",
+        "address": "7353 South St. Braintree, MA 05184"
+      });
+      console.log(response.data); // Handle successful login
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
+
+  return (
     <div>
-        <h2>
-            {
-                user.nume
-            }
-        </h2>
-        <p>
-            {
-                user.email
-            }
-        </p>
+      <h1>Login Page</h1>
+      {error && <div>{error}</div>}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Email:</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
 )
 }
