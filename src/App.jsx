@@ -11,7 +11,7 @@ import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
 import { DataFetch } from './components/DataFetch'
-import { DataFetch2 } from './components/DataFetch2'
+import { CreateUser} from "./components/CreateUser";
 
 function App() {
 
@@ -51,10 +51,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/history' element={<History />}></Route>
-          <Route path='/forms' element={<> <Forms /> <DataFetch /> <DataFetch2 /> </>}></Route>
+          <Route path='/forms' element={<> <Forms /> <DataFetch /> </>}></Route>
           <Route path='/upgrade' element={<Upgrade />}></Route>
           <Route path='/login' element={<Login />}></Route>
-          <Route path='/signup' element={<Signup />}></Route>
+          <Route path='/signup' element={<> <Signup /> <CreateUser /> </>}></Route>
         </Routes>
       </BrowserRouter >
     </div>
