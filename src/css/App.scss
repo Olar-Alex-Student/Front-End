@@ -1,44 +1,42 @@
-$primary: #97601F;
-$secondary: #fffcf8;
+$primary: #916540;
+$secondary: #E4E5E9;
+$dark: #312B2B;
 
 @import "~/bootstrap/scss/bootstrap";
 
+* {
+  box-sizing: border-box;
+}
+
 .box {
-  height: 800px;
   width: 700px;
   border-radius: 100px;
   --bs-bg-opacity: 0.9;
   transition: 1s;
 }
 
-.box.hide {
-  --bs-bg-opacity: 0;
-}
-
 .title {
   font-size: 100px;
 }
 
-.toggle {
-  transition: 1s;
-}
-
-.toggle.hide {
-  height: 0;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-}
-
 .App {
+  display: flex;
+  flex-flow: column;
   background-image: url('../images/bison snow.jpg');
   background-size: cover;
   background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
 }
 
 .nav {
   font-size: 30px;
   --bs-bg-opacity: 0.9;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
 }
 
 .btn {
@@ -54,21 +52,26 @@ $secondary: #fffcf8;
   background-color: $primary;
 }
 
-.toggler {
+.container-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.toggle-button {
   background-color: transparent;
   border: none;
   appearance: none;
-}
-
-.toggler {
-  animation: ripple 0.8s ease-out infinite;
+  animation: grow 0.8s ease-in-out infinite;
   animation-direction: alternate-reverse;
 }
 
-@keyframes ripple {
+@keyframes grow {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.2);
   }

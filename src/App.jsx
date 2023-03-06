@@ -1,61 +1,62 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import logo from "./images/bison_logo.png"
 import './css/App.css'
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import DataFetch from './contribution/DataFetch';
+import { Navbar, Nav, Button, Container, Form } from 'react-bootstrap';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import { Home } from './components/Home'
+import { History } from './components/History'
+import { Forms } from './components/Forms'
+import { Upgrade } from './components/Upgrade'
+import { Login } from './components/Login'
+import { Signup } from './components/Signup'
+import { DataFetch } from './components/DataFetch'
+import { DataFetch2 } from './components/DataFetch2'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <div className="container p-3">
-        <ul className="nav nav-fill rounded-5 bg-primary">
-          <li className="nav-item">
-            <a href="" className="nav-link fw-bold text-light">
-              <img src={logo} width="50" height="50"
-                className="rounded-pill d-inline-block align-top" alt="" />
-                Bizonii
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="" className="nav-link text-light active">Home</a>
-          </li>
-          <li className="nav-item">
-            <a href="" className="nav-link text-light">History</a>
-          </li>
-          <li className="nav-item">
-            <a href="" className="nav-link text-light">Forms</a>
-          </li>
-          <li className="nav-item">
-            <a href="" className="nav-link text-light">Upgrade</a>
-          </li>
-          <li className="nav-item">
-            <a href="" className="nav-link text-light">Login</a>
-          </li>
-        </ul>
-      </div>
-      <div className="container">
-        <div className="d-flex justify-content-center align-content-center p-4">
-          <div className="box bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5 hide">
-            <div className="title">
-              <button type="button" className="toggler toggle" onclick="toggle()">
-                <img src={logo} width="150" height="150"
-                  className="toggler-image rounded-pill" alt="" />
-              </button>
-              <span className="toggle fw-bold hide">Forms</span>
-            </div>
-            <h4 className="toggle text-center text-secondary hide">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia
-              similique nihil, soluta nulla ratione minus modi nostrum dicta illo obcaecati, necessitatibus rem,
-              odit voluptate. Quod, consequatur repellat! Eligendi, et numquam!</h4>
-            <div className="toggle buttons d-flex gap-5 hide">
-              <button type="button" className="btn rounded-pill btn-secondary fw-bold">Login</button>
-              <button type="button" className="btn rounded-pill btn-secondary fw-bold">Sign Up</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <DataFetch/>
+      <BrowserRouter>
+        <Container>
+          <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold disabled'>
+                <img src={logo} width="46" height="46"
+                  className="rounded-pill d-inline-block align-top mx-2" alt="" />
+                Bizonii</Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill'>Home</Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/history'} className='text-secondary rounded-pill'>History</Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/forms'} className='text-secondary rounded-pill'>Forms</Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/upgrade'} className='text-secondary rounded-pill'>Upgrade</Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link as={Link} to={'/login'} className='text-secondary rounded-pill'>Login</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Container>
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/history' element={<History />}></Route>
+          <Route path='/forms' element={<> <Forms /> <DataFetch /> <DataFetch2 /> </>}></Route>
+          <Route path='/upgrade' element={<Upgrade />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/signup' element={<Signup />}></Route>
+        </Routes>
+      </BrowserRouter >
     </div>
   )
 }
