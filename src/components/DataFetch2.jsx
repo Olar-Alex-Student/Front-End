@@ -3,15 +3,14 @@ import axios from "axios";
 
 export const DataFetch2 = () => {
   const [userData, setUserData] = useState(null);
-  const apiUrl = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/e68ce6d0-a595-4312-b088-22c7a6282d73";
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZXJkc2FmZXJhZHNlcmFkQHBvZ21haWwuY29tIiwiZXhwIjoxNjc4MDQ2NTE2fQ.vMLZM5SmbtwicWyM9VJ7eYZLO_xx_StbWSiF8LupglU';
+  const apiUrl = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/e55da967-4a3d-455f-a893-e4f43fc02dea";
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb2FzZGFzZ3JlZGdyZWZkZ2VyZmRvc3NsQGdtYWlsLmNvbSIsImV4cCI6MTY3ODExMDQyMH0.X88NM_XO7CQUXcnoBVYrJaPKRiLSrWCs7OlIt0NolwI';
   const headers = { Authorization: `Bearer ${token}` };
 
   useEffect(() => {
     axios
       .get(
-        proxyUrl + apiUrl,
+        apiUrl,
         { headers }
       )
       .then((response) => setUserData(response.data))
