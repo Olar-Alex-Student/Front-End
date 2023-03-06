@@ -2,14 +2,22 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const CreateUser = () => {
-  const [data, setData] = useState({ name: '', email: '', password: '' });
+  const [data, setData] = useState({ name: '', email: '', password: '', account_type: '',
+  address: '' });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+
+
 
   const postData = async () => {
     try {
-      await axios.post(`${CORS_PROXY}https://bizoni-backend-apis.azurewebsites.net/api/v1/users`, data);
+      await axios.post(`https://bizoni-backend-apis.azurewebsites.net/api/v1/users`, {
+  "name": "Vizitiu Valentinaaa",
+  "email": "poggers1234@pogmail.comaaaa",
+  "password": "1234aaaa",
+  "account_type": "individual",
+  "address": "7353 South St. Braintree, MA 02184aaaa"
+});
       setSuccess(true);
     } catch (error) {
       setError(error.message);
@@ -28,7 +36,7 @@ export const CreateUser = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (data.name && data.email && data.password) {
+    if (data.name && data.email && data.password && data.account_type && data.address) {
       setError(null);
       setSuccess(false);
       postData();
@@ -52,6 +60,14 @@ export const CreateUser = () => {
       <label>
         Password:
         <input type="password" name="password" value={data.password} onChange={handleChange} />
+      </label>
+      <label>
+        Acc Type:
+        <input type="text" name="account_type" value={data.account_type} onChange={handleChange} />
+      </label>
+      <label>
+        Address:
+        <input type="text" name="address" value={data.address} onChange={handleChange} />
       </label>
       <button type="submit">Send Data</button>
     </form>
