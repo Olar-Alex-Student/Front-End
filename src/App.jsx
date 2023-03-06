@@ -10,7 +10,8 @@ import { Forms } from './components/Forms'
 import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
-import { DataFetch } from './components/DataFetch'
+import { SignUpForm } from './components/SignUpForm'
+import { LoginForm } from "./components/LoginForm";
 
 function App() {
 
@@ -50,10 +51,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/history' element={<History />}></Route>
-          <Route path='/forms' element={<> <Forms /> <DataFetch /> </>}></Route>
+          <Route path='/forms' element={<> <Forms /> </>}></Route>
           <Route path='/upgrade' element={<Upgrade />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/signup' element={<> <Signup /> </>}></Route>
+          <Route path='/login' element={<><Login /> <LoginForm/> </>}></Route>
+          <Route path='/signup' element={<> <Signup /> <SignUpForm /> </>}></Route>
         </Routes>
       </BrowserRouter >
     </div>
