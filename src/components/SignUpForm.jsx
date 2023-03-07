@@ -34,38 +34,49 @@ export const SignUpForm = () => {
     <div class="container">
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
-        <div class="form-group">
+        <div class="form-group py-2">
           <label>
-            <h4 class="text-center">Name</h4>
+            <h3 class="text-center text-secondary">Name</h3>
           </label>
           <input class="form-control form-control-sm mx-auto" id="inputName" placeholder="Name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
-        <div class="form-group">
+        <div class="form-group py-2">
           <label>
-            <h4 class="text-center">Email</h4>
+            <h3 class="text-center text-secondary">Email</h3>
           </label>
           <input class="form-control form-control-sm mx-auto" id="inputEmail" placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div class="form-group">
+        <div class="form-group py-2">
           <label>
-            <h4 class="text-center">Password</h4>
+            <h3 class="text-center text-secondary">Password</h3>
           </label>
           <input class="form-control form-control-sm mx-auto" id="inputPassword" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <div class="form-group">
+        <div class="form-group py-2">
           <label>
-            <h4 class="text-center">Account Type</h4>
+            <h3 class="text-center text-secondary">Account Type</h3>
           </label>
-          <input class="form-control form-control-sm mx-auto" id="inputAccountType" placeholder="Account Type" type="text" value={accountType} onChange={(e) => setAccountType(e.target.value)} />
+          {/* <input class="form-control form-control-sm mx-auto" id="inputAccountType" placeholder="Account Type" type="text" value={accountType} onChange={(e) => setAccountType(e.target.value)} /> */}
+            <br />
+            <div class="input-group mb-3">
+              <select class="form-select" aria-label="Default select example">
+                <option>Select an Option</option>
+                <option value={accountType} onChange={(e) => setAccountType(e.target.value)}>Individual</option>
+                <option value={accountType} onChange={(e) => setAccountType(e.target.value)}>Company</option>
+                <option value={accountType} onChange={(e) => setAccountType(e.target.value)}>Public Institution</option>
+              </select>
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-group py-2">
           <label>
-            <h4 class="text-center">Address</h4>
+            <h3 class="text-center text-secondary">Address</h3>
           </label>
           <input class="form-control form-control-sm mx-auto" id="inputaddress" placeholder="Address" type="address" value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
         <br />
-        <button class="text-center btn rounded-pill" type="submit" onClick={() => { } }>SignUp</button>
+        <div className="d-flex justify-content-center align-items-center b-0">
+          <button class="btn rounded-pill" type="submit" onClick={() => { } }>SignUp</button>
+        </div>
       </form>
     </div>
   )

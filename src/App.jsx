@@ -21,15 +21,16 @@ function App() {
         <Container>
           <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
             <Nav.Item>
-              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold disabled'>
+              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold'>
                 <img src={logo} width="46" height="46"
                   className="rounded-pill d-inline-block align-top mx-2" alt="" />
-                Bizonii</Nav.Link>
+                Bizonii
+              </Nav.Link>
             </Nav.Item>
 
-            <Nav.Item>
+            {/* <Nav.Item>
               <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill'>Home</Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
 
             <Nav.Item>
               <Nav.Link as={Link} to={'/history'} className='text-secondary rounded-pill'>History</Nav.Link>
@@ -51,10 +52,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/history' element={<History />}></Route>
-          <Route path='/forms' element={<> <Forms /> </>}></Route>
+          <Route path='/forms' element={<><Forms /></>}></Route>
           <Route path='/upgrade' element={<Upgrade />}></Route>
-          <Route path='/login' element={<><Login /> <LoginForm/> </>}></Route>
-          <Route path='/signup' element={<> <Signup /> <SignUpForm /> </>}></Route>
+          <Route path='/login' element={<><Login /></>}></Route>
+          <Route path='/signup' element={<> <Signup /></>}></Route>
         </Routes>
       </BrowserRouter >
     </div>

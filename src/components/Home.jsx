@@ -20,15 +20,13 @@ export const Home = () => {
         !toggle ?
           <div className="container d-flex justify-content-center p-4">
             <div className="box bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
-              <div className="title text-dark fw-bold">
-                <span>Forms</span>
+              <div className="title text center text-secondary fw-bold">
+                <span>Bizonii</span>
               </div>
-              <p className="text-center text-secondary fs-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia
-                similique nihil, soluta nulla ratione minus modi nostrum dicta illo obcaecati, necessitatibus rem,
-                odit voluptate. Quod, consequatur repellat! Eligendi, et numquam!</p>
+              <p className="text-center text-secondary fs-5">Descopera cea mai buna metoda de a-ti completa un formular in doar cateva minute! Da este chiar atat de simplu!</p>
               <div className="buttons d-flex gap-5">
                 <Button href="/login" className="rounded-pill fw-bold">Login</Button>
-                <Button href="/signup"className="rounded-pill fw-bold">Sign Up</Button>
+                <Button href="/signup" className="rounded-pill fw-bold">Sign Up</Button>
               </div>
             </div>
           </div> : null
