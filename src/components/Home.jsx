@@ -27,8 +27,8 @@ export const Home = () => {
                 similique nihil, soluta nulla ratione minus modi nostrum dicta illo obcaecati, necessitatibus rem,
                 odit voluptate. Quod, consequatur repellat! Eligendi, et numquam!</p>
               <div className="buttons d-flex gap-5">
-                <Button href="/login" className="rounded-pill fw-bold">Login</Button>
-                <Button href="/signup"className="rounded-pill fw-bold">Sign Up</Button>
+                <Button href="/login" className="custom-button rounded-pill fw-bold">Login</Button>
+                <Button href="/signup"className="custom-button rounded-pill fw-bold">Sign Up</Button>
               </div>
             </div>
           </div> : null

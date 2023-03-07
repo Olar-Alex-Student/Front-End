@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+// import { App } from '../App'
+
 
 export const DataFetch = () => {
   const [userData, setUserData] = useState(null);
@@ -14,14 +16,16 @@ export const DataFetch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(url, {
-        "name": "Cont Smasddasecher",
-        "email": "bosasddass1234@gmail.com",
-        "password": "paasdadsrola",
+      const dataa = {
+        "name": "Cont Smaaddasasd",
+        "email": "bosas234@gmail.com",
+        "password": password,
         "account_type": "individual",
-        "address": "7353 South St. Braintree, MA 05184"
-      });
+        "address": "7353 South St. Braintree, MA 051843123"
+      }
+      const response = await axios.post(url, dataa);
       console.log(response.data); // Handle successful login
+      console.log(dataa)
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -40,7 +44,7 @@ export const DataFetch = () => {
           <label>Password:</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" onClick={() => {}}>Login</button>
       </form>
     </div>
   );

@@ -10823,11 +10823,19 @@ textarea.form-control-lg {
   box-sizing: border-box;
 }
 
+body, #root {
+  min-height: 100vh;
+}
+
 .box {
   width: 700px;
   border-radius: 100px;
   --bs-bg-opacity: 0.9;
   transition: 1s;
+}
+
+.box-size-forms {
+  width: 1200px;
 }
 
 .title {
@@ -10840,8 +10848,7 @@ textarea.form-control-lg {
   background-image: url("../images/bison snow.jpg");
   background-size: cover;
   background-attachment: fixed;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
   padding: 20px;
 }
 
@@ -10854,7 +10861,7 @@ textarea.form-control-lg {
   text-decoration: underline;
 }
 
-.btn {
+.custom-button {
   color: #916540;
   background-color: #E4E5E9;
   border: 6px solid #E4E5E9;
@@ -10862,9 +10869,15 @@ textarea.form-control-lg {
   font-size: 40px;
 }
 
-.btn:hover {
+.custom-button:hover {
   color: #E4E5E9;
   background-color: #916540;
+}
+
+.medium-button-size {
+  border: 5px solid #E4E5E9;
+  padding: 6px 20px;
+  font-size: 20px;
 }
 
 .container-toggle-button {
