@@ -10,18 +10,9 @@ import { Forms } from './components/Forms'
 import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
-<<<<<<< HEAD
 import { DataFetch } from './components/DataFetch'
-<<<<<<< Updated upstream
 import { DataFetch2 } from './components/DataFetch2'
-=======
-import { CreateUser } from "./components/CreateUser";
-import { NotFound } from "./components/notFound";
-=======
-import { SignUpForm } from './components/SignUpForm'
-import { LoginForm } from "./components/LoginForm";
->>>>>>> 619b5b774e5de80e27bc1959dc5e60c3b1435234
->>>>>>> Stashed changes
+import { NotFound } from "./components/NotFound";
 
 function App() {
 
@@ -59,7 +50,7 @@ function App() {
           </Nav>
         </Container>
         <Routes>
-<<<<<<< HEAD
+
           <Route path='/' element={<Home />}>
           </Route>
           <Route path='/history' element={<History />}>
@@ -70,25 +61,10 @@ function App() {
           </Route>
           <Route path='/login' element={<Login />}>
           </Route>
-          <Route path='/signup' element={<> <Signup /> <CreateUser /> </>}>
+          <Route path='/signup' element={<> <Signup /> </>}>
           </Route>
           <Route path="*" element={<NotFound />}>
           </Route>
-=======
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/history' element={<History />}></Route>
-<<<<<<< Updated upstream
-          <Route path='/forms' element={<> <Forms /> <DataFetch /> <DataFetch2 /> </>}></Route>
-          <Route path='/upgrade' element={<Upgrade />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/signup' element={<Signup />}></Route>
-=======
-          <Route path='/forms' element={<> <Forms /> </>}></Route>
-          <Route path='/upgrade' element={<Upgrade />}></Route>
-          <Route path='/login' element={<><Login /> <LoginForm/> </>}></Route>
-          <Route path='/signup' element={<> <Signup /> <SignUpForm /> </>}></Route>
->>>>>>> 619b5b774e5de80e27bc1959dc5e60c3b1435234
->>>>>>> Stashed changes
         </Routes>
       </BrowserRouter >
     </div>
