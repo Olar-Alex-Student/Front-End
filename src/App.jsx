@@ -50,7 +50,6 @@ function App() {
           </Nav>
         </Container>
         <Routes>
-
           <Route path='/' element={<Home />}>
           </Route>
           <Route path='/history' element={<History />}>
