@@ -8,11 +8,19 @@ $dark: #312B2B;
   box-sizing: border-box;
 }
 
+body, #root {
+  min-height: 100vh;
+}
+
 .box {
   width: 700px;
   border-radius: 100px;
   --bs-bg-opacity: 0.9;
   transition: 1s;
+}
+
+.box-size-forms {
+  width: 1200px;
 }
 
 .title {
@@ -25,8 +33,7 @@ $dark: #312B2B;
   background-image: url('../images/bison snow.jpg');
   background-size: cover;
   background-attachment: fixed;
-  height: 100%;
-  width: 100%;
+  min-height: 100vh;
   padding: 20px;
 }
 
@@ -39,7 +46,7 @@ $dark: #312B2B;
   text-decoration: underline;
 }
 
-.btn {
+.custom-button  {
   color: $primary;
   background-color: $secondary;
   border: 6px solid $secondary;
@@ -47,9 +54,15 @@ $dark: #312B2B;
   font-size: 40px;
 }
 
-.btn:hover {
+.custom-button:hover {
   color: $secondary;
   background-color: $primary;
+}
+
+.medium-button-size {
+  border: 5px solid $secondary;
+  padding: 6px 20px;
+  font-size: 20px;
 }
 
 .container-toggle-button {

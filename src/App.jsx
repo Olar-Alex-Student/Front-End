@@ -12,6 +12,7 @@ import { Login } from './components/Login'
 import { Signup } from './components/Signup'
 import { SignUpForm } from './components/SignUpForm'
 import { LoginForm } from "./components/LoginForm";
+import { NotFound } from "./components/NotFound";
 
 function App() {
 
@@ -50,12 +51,20 @@ function App() {
           </Nav>
         </Container>
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/history' element={<History />}></Route>
-          <Route path='/forms' element={<><Forms /></>}></Route>
-          <Route path='/upgrade' element={<Upgrade />}></Route>
-          <Route path='/login' element={<><Login /></>}></Route>
-          <Route path='/signup' element={<> <Signup /></>}></Route>
+          <Route path='/' element={<Home />}>
+          </Route>
+          <Route path='/history' element={<History />}>
+          </Route>
+          <Route path='/forms' element={<Forms />}>
+          </Route>
+          <Route path='/upgrade' element={<Upgrade />}>
+          </Route>
+          <Route path='/login' element={<Login />}>
+          </Route>
+          <Route path='/signup' element={<> <Signup /> </>}>
+          </Route>
+          <Route path="*" element={<NotFound />}>
+          </Route>
         </Routes>
       </BrowserRouter >
     </div>

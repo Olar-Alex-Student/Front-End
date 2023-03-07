@@ -25,8 +25,8 @@ export const Home = () => {
               </div>
               <p className="text-center text-secondary fs-5">Descopera cea mai buna metoda de a-ti completa un formular in doar cateva minute! Da este chiar atat de simplu!</p>
               <div className="buttons d-flex gap-5">
-                <Button href="/login" className="rounded-pill fw-bold">Login</Button>
-                <Button href="/signup" className="rounded-pill fw-bold">Sign Up</Button>
+                <Button href="/login" className="custom-button rounded-pill fw-bold">Login</Button>
+                <Button href="/signup"className="custom-button rounded-pill fw-bold">Sign Up</Button>
               </div>
             </div>
           </div> : null
