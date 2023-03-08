@@ -25,24 +25,24 @@ export const LoginForm = () => {
   };
 
   return (
-    <><div class="container">
+    <><div className="container">
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
-        <div class="form-group py-2">
+        <div className="form-group py-2">
           <label>
-            <h3 class="text-center text-secondary">Email</h3>
+            <h3 className="text-center text-secondary">Email</h3>
           </label>
-          <input class="form-control form-control-sm mx-auto" id="inputEmail" placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input className="form-control form-control-sm mx-auto" id="inputEmail" placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div class="form-group py-2">
+        <div className="form-group py-2">
           <label>
-            <h3 class="text-center text-secondary">Password</h3>
+            <h3 className="text-center text-secondary">Password</h3>
           </label>
-          <input class="form-control form-control-sm mx-auto" id="inputPassword" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input className="form-control form-control-sm mx-auto" id="inputPassword" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <button class="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</button>
+          <button className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</button>
         </div>
       </form>
     </div>

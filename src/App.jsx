@@ -10,9 +10,8 @@ import { Forms } from './components/Forms'
 import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
-import { SignUpForm } from './components/SignUpForm'
-import { LoginForm } from "./components/LoginForm";
 import { NotFound } from "./components/NotFound";
+import { FillForm } from "./components/FillForm";
 
 function App() {
 
@@ -56,6 +55,8 @@ function App() {
           <Route path='/history' element={<History />}>
           </Route>
           <Route path='/forms' element={<Forms />}>
+          </Route>
+          <Route path='/forms/create' element={<FillForm/>}>
           </Route>
           <Route path='/upgrade' element={<Upgrade />}>
           </Route>
