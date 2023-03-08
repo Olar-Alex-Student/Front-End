@@ -42,7 +42,7 @@ export const LoginForm = () => {
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <button class="btn rounded-pill" type="submit" onClick={() => { } }>Login</button>
+          <button class="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</button>
         </div>
       </form>
     </div>
