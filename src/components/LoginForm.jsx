@@ -12,13 +12,23 @@ export const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const dataa = {
-        "email": email,
-        "password": password
+      const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
       }
-      const response = await axios.post(url, dataa);
+      const dataa = {
+        "username": email,
+        "password": password,
+        "grant_type": "",
+        "scope": "",
+        "client_id": "",
+        "client_secret": ""
+      }
+      // console.log(headers);
+      // console.log(dataa);
+      const response = await axios.post(url, dataa, headers);
       console.log(response.data);
-      console.log(dataa);
+      // console.log(dataa);
     } catch (error) {
       setError(error.response.data.message);
     }
