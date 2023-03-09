@@ -13,58 +13,56 @@ import { Signup } from './components/Signup'
 import { SignUpForm } from './components/SignUpForm'
 import { LoginForm } from "./components/LoginForm";
 import { NotFound } from "./components/NotFound";
+import { CreateForms } from "./components/CreateForms";
 
 function App() {
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Container>
-          <Nav variant='pills' className="nav-fill rounded-pill bg-primary">
-            <Nav.Item>
-              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold'>
-                <img src={logo} width="46" height="46"
-                  className="rounded-pill d-inline-block align-top mx-2" alt="" />
-                Bizonii
-              </Nav.Link>
-            </Nav.Item>
+        <Navbar expand="lg">
+          <Container className="container-nav rounded-pill bg-primary">
+            <Navbar.Toggle aria-controls="navbar-collapse-id" />
+            <Navbar.Collapse id="navbar-collapse-id">
+              <Nav className="nav-fill justify-content-around flex-grow-1">
+                <Nav.Item>
+                  <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold'>
+                    <img src={logo} width="46" height="46"
+                      className="rounded-pill d-inline-block align-top mx-2" alt="" />
+                    Bizonii
+                  </Nav.Link>
+                </Nav.Item>
 
-            {/* <Nav.Item>
-              <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill'>Home</Nav.Link>
-            </Nav.Item> */}
+                <Nav.Item>
+                  <Nav.Link as={Link} to={'/history'} className='text-secondary rounded-pill'>History</Nav.Link>
+                </Nav.Item>
 
-            <Nav.Item>
-              <Nav.Link as={Link} to={'/history'} className='text-secondary rounded-pill'>History</Nav.Link>
-            </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link as={Link} to={'/forms'} className='text-secondary rounded-pill'>Forms</Nav.Link>
+                </Nav.Item>
 
-            <Nav.Item>
-              <Nav.Link as={Link} to={'/forms'} className='text-secondary rounded-pill'>Forms</Nav.Link>
-            </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link as={Link} to={'/upgrade'} className='text-secondary rounded-pill'>Upgrade</Nav.Link>
+                </Nav.Item>
 
-            <Nav.Item>
-              <Nav.Link as={Link} to={'/upgrade'} className='text-secondary rounded-pill'>Upgrade</Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link as={Link} to={'/login'} className='text-secondary rounded-pill'>Login</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Container>
+                <Nav.Item>
+                  <Nav.Link as={Link} to={'/login'} className='text-secondary rounded-pill'>Login</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         <Routes>
-          <Route path='/' element={<Home />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/history' element={<History />} />
+          <Route path='/forms'>
+            <Route index element={<Forms />} />
+            <Route path='create' element={<CreateForms />} />
           </Route>
-          <Route path='/history' element={<History />}>
-          </Route>
-          <Route path='/forms' element={<Forms />}>
-          </Route>
-          <Route path='/upgrade' element={<Upgrade />}>
-          </Route>
-          <Route path='/login' element={<Login />}>
-          </Route>
-          <Route path='/signup' element={<> <Signup /> </>}>
-          </Route>
-          <Route path="*" element={<NotFound />}>
-          </Route>
+          <Route path='/upgrade' element={<Upgrade />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<> <Signup /> </>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter >
     </div>

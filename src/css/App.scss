@@ -37,9 +37,22 @@ body, #root {
   padding: 20px;
 }
 
-.nav {
+.navbar, .navbar-brand, .container-nav {
   font-size: 30px;
   --bs-bg-opacity: 0.9;
+}
+
+@media (max-width: 992px){
+  .container-nav {
+    border-radius: 0px!important;
+    padding: 10px;
+  }
+  .App {
+    padding: 0px;
+  }
+  .navbar {
+    padding: 0px;
+  }
 }
 
 .nav-link:hover {
