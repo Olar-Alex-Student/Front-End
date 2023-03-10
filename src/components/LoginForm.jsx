@@ -8,27 +8,22 @@ export const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const url = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/login';
+  const [token, setToken] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
       const dataa = {
-        "username": email,
-        "password": password,
-        "grant_type": "",
-        "scope": "",
-        "client_id": "",
-        "client_secret": ""
+        username: email,
+        password: password
       }
-      // console.log(headers);
-      // console.log(dataa);
-      const response = await axios.post(url, dataa, headers);
+      const response = await axios.post(url, dataa, {headers: headers});
       console.log(response.data);
-      // console.log(dataa);
+      setToken(response.data.access_token);
+      console.log(token);
     } catch (error) {
       setError(error.response.data.message);
     }
