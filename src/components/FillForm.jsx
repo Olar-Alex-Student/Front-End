@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Button, Table, Container, Modal } from 'react-bootstrap';
-import '../css/Forms.css'
 
 export const FillForm = () => {
     return(
