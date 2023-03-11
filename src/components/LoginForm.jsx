@@ -10,6 +10,7 @@ export const LoginForm = () => {
   const url = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/login';
   const [token, setToken] = useState("");
 
+  // useEffect(() => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -23,11 +24,16 @@ export const LoginForm = () => {
       const response = await axios.post(url, dataa, {headers: headers});
       console.log(response.data);
       setToken(response.data.access_token);
-      console.log(token);
     } catch (error) {
       setError(error.response.data.message);
     }
   };
+  // handleSubmit();
+  // },[token]);
+
+  useEffect(() => {
+    console.log(token);
+  }, [token]);
 
   return (
     <><div className="container">
@@ -51,7 +57,6 @@ export const LoginForm = () => {
         </div>
       </form>
     </div>
-    <p>
-    </p></>
+    </>
   )
 }
