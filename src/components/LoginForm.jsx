@@ -8,45 +8,55 @@ export const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const url = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/login';
+  const [token, setToken] = useState("");
 
+  // useEffect(() => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const dataa = {
-        "email": email,
-        "password": password
+      const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
-      const response = await axios.post(url, dataa);
+      const dataa = {
+        username: email,
+        password: password
+      }
+      const response = await axios.post(url, dataa, {headers: headers});
       console.log(response.data);
-      console.log(dataa);
+      setToken(response.data.access_token);
     } catch (error) {
       setError(error.response.data.message);
     }
   };
+  // handleSubmit();
+  // },[token]);
+
+  useEffect(() => {
+    console.log(token);
+  }, [token]);
 
   return (
-    <><div class="container">
+    <><div className="container">
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
-        <div class="form-group py-2">
+        <div className="form-group py-2">
           <label>
-            <h3 class="text-center text-secondary">Email</h3>
+            <h3 className="text-center text-secondary">Email</h3>
           </label>
-          <input class="form-control form-control-sm mx-auto" id="inputEmail" placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input className="form-control form-control-sm mx-auto" id="inputEmail" placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div class="form-group py-2">
+        <div className="form-group py-2">
           <label>
-            <h3 class="text-center text-secondary">Password</h3>
+            <h3 className="text-center text-secondary">Password</h3>
           </label>
-          <input class="form-control form-control-sm mx-auto" id="inputPassword" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input className="form-control form-control-sm mx-auto" id="inputPassword" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <button class="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</button>
+          <button className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</button>
         </div>
       </form>
     </div>
-    <p>
-    </p></>
+    </>
   )
 }

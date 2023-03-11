@@ -10,10 +10,9 @@ import { Forms } from './components/Forms'
 import { Upgrade } from './components/Upgrade'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
-import { SignUpForm } from './components/SignUpForm'
-import { LoginForm } from "./components/LoginForm";
 import { NotFound } from "./components/NotFound";
 import { CreateForms } from "./components/CreateForms";
+import { FillForm } from "./components/FillForm";
 
 function App() {
 
