@@ -57,6 +57,7 @@ function App() {
           <Route path='/forms'>
             <Route index element={<Forms />} />
             <Route path='create' element={<CreateForms />} />
+            <Route path='create/fill' element={<FillForm />} />
           </Route>
           <Route path='/upgrade' element={<Upgrade />} />
           <Route path='/login' element={<Login />} />
