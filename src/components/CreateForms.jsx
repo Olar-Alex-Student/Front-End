@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const CreateForms = () => {
 
-  const url = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/f903e408-5664-4aba-8b37-20f3c2a49725/forms";
+  const url = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/f903e408-5664-4aba-8b37-20f3c2a49725/forms/";
   const [error, setError] = useState("");
 
   const [dynamic_fields, setDynamicFields] = useState({
@@ -100,6 +100,7 @@ export const CreateForms = () => {
     }
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
+
     }
     try {
       const response = await axios.post(url, data, {headers: headers});
