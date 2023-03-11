@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import logo from "../images/bison_logo.png"
 import { Navbar, Nav, Button, Table, Container, Modal } from 'react-bootstrap';
 
 export const Forms = () => {
