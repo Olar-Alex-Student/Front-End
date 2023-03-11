@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from "../images/bison_logo.png"
+import logo from "../images/bison_logo_circle.png"
 import { Navbar, Nav, Button } from 'react-bootstrap';
 
 export const Home = () => {
@@ -12,7 +12,7 @@ export const Home = () => {
           <div className="container-toggle-button">
             <button type="button" className="toggle-button" onClick={() => { setToggle(false) }}>
               <img src={logo} width="150" height="150"
-                className="toggler-image rounded-pill" alt="" />
+                className="toggler-image" alt="" />
             </button>
           </div> : null
       }
