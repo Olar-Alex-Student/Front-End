@@ -44,14 +44,17 @@ body, #root {
 
 @media (max-width: 992px){
   .container-nav {
-    border-radius: 0px!important;
+    border-radius: 0px;
     padding: 10px;
+    background-color: transparent !important;
   }
   .App {
     padding: 0px;
   }
   .navbar {
     padding: 0px;
+    --bs-bg-opacity: 0.9;
+    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
   }
 }
 
@@ -70,6 +73,18 @@ body, #root {
 .custom-button:hover {
   color: $secondary;
   background-color: $primary;
+}
+
+.custom-button-inverted  {
+  color: $secondary;
+  background-color: $primary;
+  border: 6px solid $primary;
+}
+
+.custom-button-inverted:hover {
+  color: $primary;
+  background-color: $secondary;
+  border: 6px solid $primary;
 }
 
 .medium-button-size {

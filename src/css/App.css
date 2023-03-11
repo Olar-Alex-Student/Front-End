@@ -10859,14 +10859,17 @@ body, #root {
 
 @media (max-width: 992px) {
   .container-nav {
-    border-radius: 0px !important;
+    border-radius: 0px;
     padding: 10px;
+    background-color: transparent !important;
   }
   .App {
     padding: 0px;
   }
   .navbar {
     padding: 0px;
+    --bs-bg-opacity: 0.9;
+    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
   }
 }
 .nav-link:hover {
@@ -10884,6 +10887,18 @@ body, #root {
 .custom-button:hover {
   color: #f1f2f3;
   background-color: #916540;
+}
+
+.custom-button-inverted {
+  color: #f1f2f3;
+  background-color: #916540;
+  border: 6px solid #916540;
+}
+
+.custom-button-inverted:hover {
+  color: #916540;
+  background-color: #f1f2f3;
+  border: 6px solid #916540;
 }
 
 .medium-button-size {
