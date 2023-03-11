@@ -78,17 +78,23 @@ body, #root {
 .custom-button-inverted  {
   color: $secondary;
   background-color: $primary;
-  border: 6px solid $primary;
+  border-color: $primary;
 }
 
 .custom-button-inverted:hover {
   color: $primary;
   background-color: $secondary;
-  border: 6px solid $primary;
+  border-color: $primary;
 }
 
 .medium-button-size {
-  border: 5px solid $secondary;
+  border-width: 5px;
+  padding: 6px 20px;
+  font-size: 20px;
+}
+
+.medium-button-size:hover {
+  border-width: 5px;
   padding: 6px 20px;
   font-size: 20px;
 }

@@ -10892,17 +10892,23 @@ body, #root {
 .custom-button-inverted {
   color: #f1f2f3;
   background-color: #916540;
-  border: 6px solid #916540;
+  border-color: #916540;
 }
 
 .custom-button-inverted:hover {
   color: #916540;
   background-color: #f1f2f3;
-  border: 6px solid #916540;
+  border-color: #916540;
 }
 
 .medium-button-size {
-  border: 5px solid #f1f2f3;
+  border-width: 5px;
+  padding: 6px 20px;
+  font-size: 20px;
+}
+
+.medium-button-size:hover {
+  border-width: 5px;
   padding: 6px 20px;
   font-size: 20px;
 }
