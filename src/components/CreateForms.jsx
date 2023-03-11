@@ -127,7 +127,7 @@ export const CreateForms = () => {
                 <Form.Label>Dynamic Fields</Form.Label>
                 <ListGroup>
                   {Object.keys(dynamic_fields).map((key, i) => (
-                    <ListGroup.Item action onClick={(event) => { loadDynamicField(event, key) }}>{key}</ListGroup.Item>
+                    <ListGroup.Item key={key} action onClick={(event) => { loadDynamicField(event, key) }}>{key}</ListGroup.Item>
                   ))}
                 </ListGroup>
                 <div className='d-flex align-items-center justify-content-around'>
