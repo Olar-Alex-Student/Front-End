@@ -115,7 +115,7 @@ export const CreateForms = () => {
     <>
       <div className="container d-flex justify-content-center p-4">
         <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
-          <div className="title text-dark fw-bold">
+          <div className="title text-secondary fw-bold">
             <span>Create Form</span>
           </div>
           <Container>
@@ -167,7 +167,7 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={handleSubmit}>Create!</Button>
+                  <Button  href="/forms/create/fill" className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={handleSubmit}>Create!</Button>
                 </div>
               </div>
             </form>

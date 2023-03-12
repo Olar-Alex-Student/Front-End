@@ -11,7 +11,7 @@ export const Forms = () => {
     <>
       <div className="container d-flex justify-content-center p-4">
         <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
-          <div className="title text-dark fw-bold">
+          <div className="title text-secondary fw-bold">
             <span>My Forms</span>
           </div>
           <Button href="/forms/create" className="custom-button medium-button-size rounded-pill fw-bold align-self-start">Create New Form</Button>
