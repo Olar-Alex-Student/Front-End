@@ -4,7 +4,12 @@ import axios from "axios";
 
 export const CreateForms = () => {
 
-  const url = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/f903e408-5664-4aba-8b37-20f3c2a49725/forms/";
+  const url = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/1d3294ee-324c-4458-bd53-24d35d2a340f/forms/";
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhcmVrdXNvNTAwMEBnbWFpbC5jb20iLCJleHAiOjE2Nzg2MzgxMzd9.DExXR47VwGcSx353cd0ihXqHtBjUr63ASfodV9KK44I';
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+
   const [error, setError] = useState("");
 
   const [dynamic_fields, setDynamicFields] = useState({
@@ -28,6 +33,13 @@ export const CreateForms = () => {
       'mandatory': true,
       'keywords': 'CNP, Social Number',
       'options': ''
+    },
+    'An': {
+      'placeholder': 'an',
+      'type': 'single-choice',
+      'mandatory': true,
+      'keywords': 'An, Year',
+      'options': '2000, 2001'
     }
   });
 
@@ -70,44 +82,60 @@ export const CreateForms = () => {
     setDynamicFields({ ...dynamic_fields, 'NEW': { 'placeholder': '', 'type': '', 'mandatory': false, 'keywords': '', 'options': '' } });
   }
 
+  function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     Object.entries(dynamic_fields).forEach(([key, value]) => {
-      const array = dynamic_fields[key].options.toString().split(',')
-      const trimmedArray = [];
-      for (let i = 0; i < array.length; i++) {
-        const trimmedElement = array[i].trim();
-        trimmedArray.push(trimmedElement);
+      const options_array = dynamic_fields[key].options.toString().split(',')
+      const options_trimmedArray = [];
+      const keywords_array = dynamic_fields[key].keywords.toString().split(',')
+      const keywords_trimmedArray = [];
+      for (let i = 0; i < options_array.length; i++) {
+        const options_trimmedElement = options_array[i].trim();
+        options_trimmedArray.push(options_trimmedElement);
       }
-      dynamic_fields[key].options = trimmedArray
+      for (let i = 0; i < keywords_array.length; i++) {
+        const keywords_trimmedElement = keywords_array[i].trim();
+        keywords_trimmedArray.push(keywords_trimmedElement);
+      }
+      dynamic_fields[key].options = options_trimmedArray
+      dynamic_fields[key].keywords = keywords_trimmedArray
     })
     console.log(dynamic_fields)
+    const dynamic_fields_array = json2array(dynamic_fields)
     const data = {
-      "title": "Document Permsfsdfis Conducere",
-      "delete_form_date": "1680619808",
+      "title": "Fertre fdsf",
+      "delete_form_date": "1680619408",
       "sections": [
         {
           "scan_document_type": "student_card",
-          "text": "Studentul <nume> , din grupa , anul <anul>. Aleg optiunea <opt1>."
+          "text": "Studentul."
         },
         {
           "scan_document_type": "identity_card",
-          "text": "Cu CNP <cnp>, seria , nr."
+          "text": "Cu CNP, seria , nr."
         }
       ],
-      dynamic_fields
+      "dynamic_fields": dynamic_fields_array
     }
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-
-    }
+    console.log(data)
     try {
-      const response = await axios.post(url, data, {headers: headers});
+      const response = await axios.post(url, data, { headers: headers });
       console.log(response.data); // Handle successful login
       console.log(data)
     } catch (error) {
       console.log('error'); // error.response.data.message
+      setError(error.response.data.message)
+      // console.log(error)
     }
   };
 
