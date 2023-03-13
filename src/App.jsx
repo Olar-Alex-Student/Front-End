@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import logo from "./images/bison_logo.png"
+import logo from "./images/bison_logo_circle.png"
 import './css/App.css'
 import { Navbar, Nav, Button, Container, Form } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route, BrowserRouter, Link, RouterProvider } from 'react-router-dom';
@@ -27,7 +27,7 @@ function App() {
                 <Nav.Item>
                   <Nav.Link as={Link} to={'/'} className='text-secondary rounded-pill fw-bold'>
                     <img src={logo} width="46" height="46"
-                      className="rounded-pill d-inline-block align-top mx-2" alt="" />
+                      className="d-inline-block align-top mx-2" alt="" />
                     Bizonii
                   </Nav.Link>
                 </Nav.Item>
