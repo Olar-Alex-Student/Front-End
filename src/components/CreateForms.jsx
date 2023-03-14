@@ -2,11 +2,16 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGroup, Tab } from 'react-bootstrap';
 import axios from "axios";
 import JoditEditor from 'jodit-react';
+import {LoginForm} from './LoginForm';
 
 export const CreateForms = () => {
 
-  const url = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/66cbb2dc-2202-411c-8395-72e996bd6ccc/forms/";
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhc2QzMzNAZ21haWwuY29tIiwiZXhwIjoxNjc4NzIwMzc5fQ.alabAy_GUep4H0YhML6_W3mzEMb5ppJYfRp8MVX5SwY';
+  const token = sessionStorage.getItem('token');
+
+  const id = sessionStorage.getItem('id');
+
+  const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/`;
+
   const headers = {
     Authorization: `Bearer ${token}`
   };

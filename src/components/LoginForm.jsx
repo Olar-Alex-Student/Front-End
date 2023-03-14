@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// const tokenGlobal = token;
+// const idGlobal = id;
 
 export const LoginForm = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
   const url = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/login';
+
   const [token, setToken] = useState("");
   const [id, setID] = useState("");
 
@@ -37,6 +41,10 @@ export const LoginForm = () => {
     console.log(token);
     console.log(id)
   }, [token, id]);
+
+  sessionStorage.setItem('token', token);
+
+  sessionStorage.setItem('id', id);
 
   return (
     <><div className="container">
