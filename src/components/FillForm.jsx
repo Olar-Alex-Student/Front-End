@@ -21,14 +21,13 @@ export const FillForm = () => {
 
 
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
     }
 
     return (
     <>
-    <div className="d-flex justify-content-center p-4">
+    <div className=" container d-flex justify-content-center p-4">
         <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
             <div className="title text-secondary fw-bold">
                 <span>Fill Form</span>
@@ -68,8 +67,18 @@ export const FillForm = () => {
                             <Form.Control className="mb-3" type="number" placeholder="Ap" onChange={(e) => { setAp(e.target.value) }} />
                             
                             <Form.Label>Judet</Form.Label>
-                            <Form.Control className="mb-3" type="text" placeholder="County" onChange={(e) => { setCounty(e.target.value) }} />
-                            
+                            <Form.Select className="mb-3" value={county} onChange={(e) => setCounty(e.target.value)} defaultValue="none">
+                            {/* <option>Scan document type</option> */}
+                                <option value="none">None</option>
+                                <option value="Suceava">Suceava</option>
+                                <option value="Botosani">Botosani</option>
+                                <option value="Neamt">Neamt</option>
+                                <option value="Maramures">Maramures</option>
+                                <option value="Bistrita">Bistrita</option>
+                                <option value="Mures">Mures</option>
+                                <option value="Harghita">Harghita</option>
+                            </Form.Select>
+
                             <Form.Label>Email</Form.Label>
                             <Form.Control className="mb-3" type="email" placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
 
@@ -92,6 +101,7 @@ export const FillForm = () => {
                             </div>
                         </div>
                     </form>
+
                 </form>
             </Container>
         </div>
