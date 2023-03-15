@@ -22,6 +22,13 @@ export const FillForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const output_data = {
+            "title": title,
+            "delete_form_date": Math.floor(Date.now() / 1000 + 86400 * data_retension_period), // 2592000 = 30 days Unix epoch time
+            "sections": sections,
+            "dynamic_fields": dynamic_fields_array
+        }
+
         try{
 
         }
