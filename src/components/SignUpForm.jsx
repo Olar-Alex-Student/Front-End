@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 
 export const SignUpForm = () => {
+
+  const navigate = useNavigate();
+
   const url = "https://bizoni-backend-apis.azurewebsites.net/api/v1/users/";
 
   const [name, setName] = useState("");
@@ -26,6 +29,7 @@ export const SignUpForm = () => {
       const response = await axios.post(url, dataa);
       console.log(response.data); // Handle successful login
       console.log(dataa)
+      navigate("/");
     } catch (error) {
       setError(error.response.data.message);
     }
