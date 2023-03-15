@@ -56,13 +56,13 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group py-2">
           <Form.Label>
-            <h3 className="text-center text-secondary">Email</h3>
+            <h3 className="text-center text-secondary mb-0">Email</h3>
           </Form.Label>
           <Form.Control className="mb-3" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="form-group py-2">
           <Form.Label>
-            <h3 className="text-center text-secondary">Password</h3>
+            <h3 className="text-center text-secondary mb-0">Password</h3>
           </Form.Label>
           <Form.Control className="mb-3" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>

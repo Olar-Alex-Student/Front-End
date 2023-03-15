@@ -37,25 +37,25 @@ export const SignUpForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-group py-2">
           <Form.Label>
-            <h3 className="text-center text-secondary">Name</h3>
+            <h3 className="text-center text-secondary mb-0">Name</h3>
           </Form.Label>
           <Form.Control className="mb-3" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="form-group py-2">
           <Form.Label>
-            <h3 className="text-center text-secondary">Email</h3>
+            <h3 className="text-center text-secondary mb-0">Email</h3>
           </Form.Label>
           <Form.Control className="mb-3" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="form-group py-2">
           <Form.Label>
-            <h3 className="text-center text-secondary">Password</h3>
+            <h3 className="text-center text-secondary mb-0">Password</h3>
           </Form.Label>
           <Form.Control className="mb-3" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="form-group py-2">
           <Form.Label>
-            <h3 className="text-center text-secondary">Account Type</h3>
+            <h3 className="text-center text-secondary mb-0">Account Type</h3>
           </Form.Label>
             <br />
             <div className="input-group mb-3">
@@ -69,7 +69,7 @@ export const SignUpForm = () => {
         </div>
         <div className="form-group py-2">
           <Form.Label>
-            <h3 className="text-center text-secondary">Address</h3>
+            <h3 className="text-center text-secondary mb-0">Address</h3>
           </Form.Label>
           <Form.Control className="mb-3" type="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
