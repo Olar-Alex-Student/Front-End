@@ -54,20 +54,20 @@ export const LoginForm = () => {
     <div className="container">
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
-        <div className="form-group py-2">
+        <div className="form-group">
           <Form.Label>
             <h3 className="text-center text-secondary mb-0">Email</h3>
           </Form.Label>
-          <Form.Control className="mb-3" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Form.Control className="mb-4" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div className="form-group py-2">
+        <div className="form-group">
           <Form.Label>
             <h3 className="text-center text-secondary mb-0">Password</h3>
           </Form.Label>
-          <Form.Control className="mb-3" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Form.Control className="mb-4" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <br />
-        <div className="d-flex justify-content-center align-items-center b-0">
+        <div className="d-flex justify-content-center align-items-center mb-4">
           <Button className="custom-button rounded-pill fw-bold mb-3" type="submit">Login</Button>
         </div>
       </form>
