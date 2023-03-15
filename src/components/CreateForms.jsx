@@ -12,7 +12,6 @@ export const CreateForms = () => {
   const handleShow = () => setShow(true);
 
   const token = sessionStorage.getItem('token');
-
   const id = sessionStorage.getItem('id');
 
   const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/`;

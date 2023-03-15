@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 // const tokenGlobal = token;
 // const idGlobal = id;
 
 export const LoginForm = () => {
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +34,7 @@ export const LoginForm = () => {
       console.log(response.data);
       setToken(response.data.access_token);
       setID(response.data.user_id);
+      navigate("/");
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -44,7 +48,6 @@ export const LoginForm = () => {
   }, [token, id]);
 
   sessionStorage.setItem('token', token);
-
   sessionStorage.setItem('id', id);
 
   return (
@@ -65,7 +68,7 @@ export const LoginForm = () => {
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <Button href="" className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</Button>
+          <Button className="btn custom-button rounded-pill" type="submit">Login</Button>
         </div>
       </form> 
     </div>
