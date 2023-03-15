@@ -59,7 +59,7 @@ export const SignUpForm = () => {
           </Form.Label>
             <br />
             <div className="input-group mb-3">
-              <Form.Select className="mb-3" value={accountType} onChange={(e) => setAccountType(e.target.value)}>
+              <Form.Select value={accountType} onChange={(e) => setAccountType(e.target.value)}>
                 <option>Select an Option</option>
                 <option>Individual</option>
                 <option>Company</option>
