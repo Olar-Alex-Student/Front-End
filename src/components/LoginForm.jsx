@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Button } from "react-bootstrap";
 
 // const tokenGlobal = token;
 // const idGlobal = id;
@@ -47,7 +48,7 @@ export const LoginForm = () => {
   sessionStorage.setItem('id', id);
 
   return (
-    <><div className="container">
+    <div className="container">
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group py-2">
@@ -64,10 +65,9 @@ export const LoginForm = () => {
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <button className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</button>
+          <Button href="/" className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</Button>
         </div>
-      </form>
+      </form> 
     </div>
-    </>
-  )
+  );
 }

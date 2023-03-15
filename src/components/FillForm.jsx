@@ -19,8 +19,6 @@ export const FillForm = () => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
 
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
     }
@@ -101,7 +99,6 @@ export const FillForm = () => {
                             </div>
                         </div>
                     </form>
-
                 </form>
             </Container>
         </div>
