@@ -16,9 +16,6 @@ export const LoginForm = () => {
 
   const url = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/login';
 
-  const [token, setToken] = useState("");
-  const [id, setID] = useState("");
-
   // useEffect(() => {
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,23 +29,15 @@ export const LoginForm = () => {
       }
       const response = await axios.post(url, dataa, { headers: headers });
       console.log(response.data);
-      setToken(response.data.access_token);
-      setID(response.data.user_id);
+      console.log(response.data.access_token);
+      console.log(response.data.user_id);
+      sessionStorage.setItem('token', response.data.access_token);
+      sessionStorage.setItem('id', response.data.user_id);
       navigate("/");
     } catch (error) {
       setError(error.response.data.message);
     }
   };
-  // handleSubmit();
-  // },[token]);
-
-  useEffect(() => {
-    console.log(token);
-    console.log(id)
-  }, [token, id]);
-
-  sessionStorage.setItem('token', token);
-  sessionStorage.setItem('id', id);
 
   return (
     <div className="container">
