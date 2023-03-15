@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 // const tokenGlobal = token;
@@ -13,7 +13,7 @@ export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  
+
   const url = 'https://bizoni-backend-apis.azurewebsites.net/api/v1/login';
 
   const [token, setToken] = useState("");
@@ -30,7 +30,7 @@ export const LoginForm = () => {
         username: email,
         password: password
       }
-      const response = await axios.post(url, dataa, {headers: headers});
+      const response = await axios.post(url, dataa, { headers: headers });
       console.log(response.data);
       setToken(response.data.access_token);
       setID(response.data.user_id);
@@ -55,22 +55,23 @@ export const LoginForm = () => {
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group py-2">
-          <label>
+          <Form.Label>
             <h3 className="text-center text-secondary">Email</h3>
-          </label>
-          <input className="form-control form-control-sm mx-auto" id="inputEmail" placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </Form.Label>
+          <Form.Control className="mb-3" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="form-group py-2">
-          <label>
+          <Form.Label>
             <h3 className="text-center text-secondary">Password</h3>
-          </label>
-          <input className="form-control form-control-sm mx-auto" id="inputPassword" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </Form.Label>
+          <Form.Control className="mb-3" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <Button className="btn custom-button rounded-pill" type="submit">Login</Button>
+          <Button className="custom-button rounded-pill fw-bold mb-3" type="submit">Login</Button>
         </div>
-      </form> 
+      </form>
+      <h3 className="text-center text-secondary">Don't have an account yet? <a className="fw-bold text-secondary" href="/signup">Sign up</a></h3>
     </div>
   );
 }

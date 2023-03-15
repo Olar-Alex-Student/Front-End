@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Button, Form } from "react-bootstrap";
 
 
 export const SignUpForm = () => {
@@ -35,49 +36,49 @@ export const SignUpForm = () => {
       {error && <div>{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group py-2">
-          <label>
+          <Form.Label>
             <h3 className="text-center text-secondary">Name</h3>
-          </label>
-          <input className="form-control form-control-sm mx-auto" id="inputName" placeholder="Name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          </Form.Label>
+          <Form.Control className="mb-3" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="form-group py-2">
-          <label>
+          <Form.Label>
             <h3 className="text-center text-secondary">Email</h3>
-          </label>
-          <input className="form-control form-control-sm mx-auto" id="inputEmail" placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </Form.Label>
+          <Form.Control className="mb-3" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="form-group py-2">
-          <label>
+          <Form.Label>
             <h3 className="text-center text-secondary">Password</h3>
-          </label>
-          <input className="form-control form-control-sm mx-auto" id="inputPassword" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </Form.Label>
+          <Form.Control className="mb-3" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="form-group py-2">
-          <label>
+          <Form.Label>
             <h3 className="text-center text-secondary">Account Type</h3>
-          </label>
-          {/* <input class="form-control form-control-sm mx-auto" id="inputAccountType" placeholder="Account Type" type="text" value={accountType} onChange={(e) => setAccountType(e.target.value)} /> */}
+          </Form.Label>
             <br />
             <div className="input-group mb-3">
-              <select className="form-select" aria-label="Default select example">
+              <Form.Select className="mb-3" value={accountType} onChange={(e) => setAccountType(e.target.value)}>
                 <option>Select an Option</option>
-                <option value={accountType} onChange={(e) => setAccountType(e.target.value)}>Individual</option>
-                <option value={accountType} onChange={(e) => setAccountType(e.target.value)}>Company</option>
-                <option value={accountType} onChange={(e) => setAccountType(e.target.value)}>Public Institution</option>
-              </select>
+                <option>Individual</option>
+                <option>Company</option>
+                <option>Public Institution</option>
+              </Form.Select>
             </div>
         </div>
         <div className="form-group py-2">
-          <label>
+          <Form.Label>
             <h3 className="text-center text-secondary">Address</h3>
-          </label>
-          <input className="form-control form-control-sm mx-auto" id="inputaddress" placeholder="Address" type="address" value={address} onChange={(e) => setAddress(e.target.value)} />
+          </Form.Label>
+          <Form.Control className="mb-3" type="address" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <button href="/" className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>SignUp</button>
+          <Button className="custom-button rounded-pill fw-bold mb-3" type="submit">SignUp</Button>
         </div>
       </form>
+      <h3 className="text-center text-secondary">Do have an account already? <a className="fw-bold text-secondary" href="/login">Login</a></h3>
     </div>
   )
 }
