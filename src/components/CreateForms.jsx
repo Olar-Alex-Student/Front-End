@@ -6,6 +6,11 @@ import {LoginForm} from './LoginForm';
 
 export const CreateForms = () => {
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const token = sessionStorage.getItem('token');
 
   const id = sessionStorage.getItem('id');
@@ -183,17 +188,17 @@ export const CreateForms = () => {
     })
     console.log(dynamic_fields)
     const dynamic_fields_array = json2array(dynamic_fields)
-    const data = {
+    const dataa = {
       "title": title,
       "delete_form_date": Math.floor(Date.now() / 1000 + 86400 * data_retension_period), // 2592000 = 30 days Unix epoch time
       "sections": sections,
       "dynamic_fields": dynamic_fields_array
     }
-    console.log(data)
+    console.log(dataa)
     try {
-      const response = await axios.post(url, data, { headers: headers });
+      const response = await axios.post(url, dataa, { headers: headers });
       console.log(response.data); // Handle successful login
-      console.log(data)
+      console.log(dataa)
     } catch (error) {
       console.log('error'); // error.response.data.message
       setError(error.response.data.message)
@@ -289,37 +294,24 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={handleSubmit}>Create!</Button>
+                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={handleShow}>Create!</Button>
                 </div>
               </div>
 
-            {/* modal start */}
-
-            {/* <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Launch demo modal
-            </button>
-
-            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" className="open" data-dismiss="modal" aria-label="open">
-                      <span aria-hidden="true"></span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    ...
-                  </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-
-            {/* modal end */}
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Select An Option</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>What To Do With This Form</Modal.Body>
+                <Modal.Footer>
+                  <Button href="/" variant="secondary" onClick={handleSubmit}>
+                    Save And Go Home
+                  </Button>
+                  <Button href="/forms/create/fill" variant="primary" onClick={handleSubmit}>
+                    Fill Form
+                  </Button>
+                </Modal.Footer>
+              </Modal>
 
             </form>
           </Container>
