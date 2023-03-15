@@ -65,7 +65,7 @@ export const LoginForm = () => {
         </div>
         <br />
         <div className="d-flex justify-content-center align-items-center b-0">
-          <Button href="/" className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</Button>
+          <Button href="" className="btn custom-button rounded-pill" type="submit" onClick={() => { } }>Login</Button>
         </div>
       </form> 
     </div>

@@ -163,7 +163,7 @@ export const CreateForms = () => {
     return result;
   }
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     Object.entries(dynamic_fields).forEach(([key, value]) => {
@@ -188,17 +188,17 @@ export const CreateForms = () => {
     })
     console.log(dynamic_fields)
     const dynamic_fields_array = json2array(dynamic_fields)
-    const dataa = {
+    const output_data = {
       "title": title,
       "delete_form_date": Math.floor(Date.now() / 1000 + 86400 * data_retension_period), // 2592000 = 30 days Unix epoch time
       "sections": sections,
       "dynamic_fields": dynamic_fields_array
     }
-    console.log(dataa)
+    console.log(output_data)
     try {
-      const response = await axios.post(url, dataa, { headers: headers });
+      const response = await axios.post(url, output_data, { headers: headers });
       console.log(response.data); // Handle successful login
-      console.log(dataa)
+      console.log(output_data)
     } catch (error) {
       console.log('error'); // error.response.data.message
       setError(error.response.data.message)
@@ -294,20 +294,20 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={handleShow}>Create!</Button>
+                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => {handleSubmit(e); handleShow()}}>Create!</Button>
                 </div>
               </div>
 
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                  <Modal.Title>Select An Option</Modal.Title>
+                  <Modal.Title>Form Created</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>What To Do With This Form</Modal.Body>
+                <Modal.Body>What do you want to do with this form?</Modal.Body>
                 <Modal.Footer>
-                  <Button href="/" variant="secondary" onClick={handleSubmit}>
-                    Save And Go Home
+                  <Button href="/" variant="secondary">
+                    Go Back Home
                   </Button>
-                  <Button href="/forms/create/fill" variant="primary" onClick={handleSubmit}>
+                  <Button href="/forms/create/fill" variant="primary">
                     Fill Form
                   </Button>
                 </Modal.Footer>
