@@ -34,33 +34,32 @@ export const FillForm = () => {
             'Content-Type': 'application/x-www-form-urlencoded'
         };
 
+        const output_data = {
+            "submission_time": 1678028760,
+            "completed_dynamic_fields": {
+                "cnp": cnp,
+                "name": name,
+                "lastname": lastName,
+                "location": location,
+                "street": street,
+                "nr": nr,
+                "block": block,
+                "stair": stair,
+                "floor": floor,
+                "apartment": ap,
+                "county": county,
+                "email": email,
+                "phone": phone
+            }
+        }
+
         // const output_data = {
         //     "submission_time": 1678028760,
         //     "completed_dynamic_fields": {
         //         "cnp": cnp,
-        //         "name": name,
-        //         "lastname": lastName,
-        //         "location": location,
-        //         "street": street,
-        //         "nr": nr,
-        //         "block": block,
-        //         "stair": stair,
-        //         "floor": floor,
-        //         "apartment": ap,
-        //         "county": county,
-        //         "email": email,
-        //         "phone": phone
+        //         "name": name
         //     }
         // }
-
-        const output_data = {
-            "submission_time": 1678028760,
-            "completed_dynamic_fields": {
-                "cnp": 1234567890,
-                "name": "Valentin",
-                "address": "7353 South St. Braintree, MA 02184"
-            }
-        }
 
         try {
             const response = await axios.post(url, output_data, { headers: headers });
