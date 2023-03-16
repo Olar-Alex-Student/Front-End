@@ -6,6 +6,8 @@ import {LoginForm} from './LoginForm';
 
 export const CreateForms = () => {
 
+  const [formID, setFromID] = useState("");
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -196,6 +198,8 @@ export const CreateForms = () => {
       const response = await axios.post(url, output_data, { headers: headers });
       console.log(response.data); // Handle successful login
       console.log(output_data)
+      setFromID(response.data.id);
+      sessionStorage.setItem('formID', response.data.id);
     } catch (error) {
       console.log('error'); // error.response.data.message
       setError(error.response.data.message)

@@ -5,6 +5,8 @@ import JoditEditor from 'jodit-react';
 
 export const FillForm = () => {
 
+    const [error, setError] = useState("");
+
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
     const [cnp, setCNP] = useState("");
@@ -22,18 +24,54 @@ export const FillForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const token = sessionStorage.getItem('token');
+        const id = sessionStorage.getItem('id');
+        const formID = sessionStorage.getItem('formID');
+
+        const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${formID}/submissions/`;
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        };
+
+        // const output_data = {
+        //     "submission_time": 1678028760,
+        //     "completed_dynamic_fields": {
+        //         "cnp": cnp,
+        //         "name": name,
+        //         "lastname": lastName,
+        //         "location": location,
+        //         "street": street,
+        //         "nr": nr,
+        //         "block": block,
+        //         "stair": stair,
+        //         "floor": floor,
+        //         "apartment": ap,
+        //         "county": county,
+        //         "email": email,
+        //         "phone": phone
+        //     }
+        // }
+
         const output_data = {
-            "title": title,
-            "delete_form_date": Math.floor(Date.now() / 1000 + 86400 * data_retension_period), // 2592000 = 30 days Unix epoch time
-            "sections": sections,
-            "dynamic_fields": dynamic_fields_array
+            "submission_time": 1678028760,
+            "completed_dynamic_fields": {
+                "cnp": 1234567890,
+                "name": "Valentin",
+                "address": "7353 South St. Braintree, MA 02184"
+            }
         }
 
-        try{
-
-        }
-        catch (error){
-
+        try {
+            const response = await axios.post(url, output_data, { headers: headers });
+            console.log(response.data); // Handle successful login
+            console.log(output_data);
+        } catch (error) {
+            console.log('error'); // error.response.data.message
+            console.error(error);
+            console.log(error.response.status); // logs the status code
+            console.log(error.response.data);
+            // console.log(error)
         }
     }
 
@@ -113,6 +151,12 @@ export const FillForm = () => {
                             </div>
                         </div>
                     </form>
+                    <br/>
+                    <div className="col-lg-12">
+                        <div className='d-flex align-items-center justify-content-center'>
+                            <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => handleSubmit(e)}>Fill Form</Button>
+                        </div>
+                    </div>
                 </div>
             </Container>
         </div>
