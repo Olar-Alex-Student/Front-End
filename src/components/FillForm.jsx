@@ -32,35 +32,38 @@ export const FillForm = () => {
 
         const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${formID}/submissions/`;
         const headers = {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
         };
 
-        const output_data = {
+        // const output_data = {
+        //     "submission_time": timeNow,
+        //     "completed_dynamic_fields": {
+        //         "cnp": cnp,
+        //         "name": name,
+        //         "lastname": lastName,
+        //         "location": location,
+        //         "street": street,
+        //         "nr": nr,
+        //         "block": block,
+        //         "stair": stair,
+        //         "floor": floor,
+        //         "apartment": ap,
+        //         "county": county,
+        //         "email": email,
+        //         "phone": phone
+        //     }
+        // }
+
+         const output_data = {
             "submission_time": timeNow,
             "completed_dynamic_fields": {
-                "cnp": cnp,
-                "name": name,
-                "lastname": lastName,
-                "location": location,
-                "street": street,
-                "nr": nr,
-                "block": block,
-                "stair": stair,
-                "floor": floor,
-                "apartment": ap,
-                "county": county,
-                "email": email,
-                "phone": phone
+                "cnp": 1234567890,
+                "name": "Valentin",
+                "address": "7353 South St. Braintree, MA 02184"
             }
         }
 
-        // const output_data = {
-        //     "submission_time": 1678028760,
-        //     "completed_dynamic_fields": {
-        //         "cnp": cnp,
-        //         "name": name
-        //     }
-        // }
 
         try {
             const response = await axios.post(url, output_data, { headers: headers });
@@ -71,6 +74,7 @@ export const FillForm = () => {
             console.error(error);
             console.log(error.response.status); // logs the status code
             console.log(error.response.data);
+            console.log(output_data);
             // console.log(error)
         }
     }
