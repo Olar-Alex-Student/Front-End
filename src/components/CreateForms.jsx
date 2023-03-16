@@ -11,15 +11,6 @@ export const CreateForms = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const token = sessionStorage.getItem('token');
-  const id = sessionStorage.getItem('id');
-
-  const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/`;
-
-  const headers = {
-    Authorization: `Bearer ${token}`
-  };
-
   const [error, setError] = useState("");
 
   const editor = useRef(null);
@@ -164,6 +155,13 @@ export const CreateForms = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const token = sessionStorage.getItem('token');
+    const id = sessionStorage.getItem('id');
+    const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/`;
+    const headers = {Authorization: `Bearer ${token}`};
+
+    console.log(token)
 
     Object.entries(dynamic_fields).forEach(([key, value]) => {
       const options_array = dynamic_fields[key].options.toString().split(',')
