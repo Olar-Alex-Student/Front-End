@@ -28,14 +28,15 @@ export const FillForm = () => {
         const id = sessionStorage.getItem('id');
         const formID = sessionStorage.getItem('formID');
 
+        const timeNow = Math.floor( Date.now() / 1000 );
+
         const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${formID}/submissions/`;
         const headers = {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
+            Authorization: `Bearer ${token}`
         };
 
         const output_data = {
-            "submission_time": 1678028760,
+            "submission_time": timeNow,
             "completed_dynamic_fields": {
                 "cnp": cnp,
                 "name": name,
