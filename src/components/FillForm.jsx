@@ -20,6 +20,7 @@ export const FillForm = () => {
     const [county, setCounty] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [year, setYear] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,31 +36,22 @@ export const FillForm = () => {
             Authorization: `Bearer ${token}`
         };
 
-        // const output_data = {
-        //     "submission_time": timeNow,
-        //     "completed_dynamic_fields": {
-        //         "cnp": cnp,
-        //         "nume": name,
-        //         "prenume": lastName,
-        //         "locatie": location,
-        //         "street": street,
-        //         "nr": nr,
-        //         "block": block,
-        //         "stair": stair,
-        //         "floor": floor,
-        //         "apartment": ap,
-        //         "county": county,
-        //         "email": email,
-        //         "phone": phone
-        //     }
-        // }
-
         const output_data = {
             "completed_dynamic_fields": {
-              "prenume": "Alex",
-              "nume": "Olar",
-              "an": "2002",
-              "cnp": 1234,
+                "prenume": name,
+                "nume": lastName,
+                "an": year,
+                "cnp": cnp,
+                "locatie": location,
+                "strada": street,
+                "numar": nr,
+                "bloc": block,
+                "scara": stair,
+                "etaj": floor,
+                "apartament": ap,
+                "judet": county,
+                "email": email,
+                "telefon": phone
             }
         }
 
@@ -78,6 +70,7 @@ export const FillForm = () => {
             console.log(output_data);
             console.log(formID);
             console.log(id)
+            alert("Please Fill All The Input Fields");
             // console.log(error)
         }
     }
@@ -98,6 +91,9 @@ export const FillForm = () => {
                             
                             <Form.Label>Last Name</Form.Label>
                             <Form.Control className="mb-3" type="text" placeholder="Last Name" onChange={(e) => { setLastName(e.target.value) }} />
+
+                            <Form.Label>Year</Form.Label>
+                            <Form.Control className="mb-3" type="number" placeholder="Year" onChange={(e) => { setYear(e.target.value) }} />
                             
                             <Form.Label>CNP</Form.Label>
                             <Form.Control className="mb-3" type="number" placeholder="CNP" onChange={(e) => { setCNP(e.target.value) }} />
@@ -152,7 +148,7 @@ export const FillForm = () => {
                             <br/>
                             <div className="container">
                                 <h4>
-                                    {name} {lastName}, cu CNP-ul: {cnp}. Cu domiciliul in {location}, judetul {county}, pe strada {street}, numarul {nr}, blocul {block}, scara {stair}, etajul {floor}, apartamentul {ap}.
+                                    {name} {lastName}, cu CNP-ul: {cnp}, nascut in anul {year}. Cu domiciliul in {location}, judetul {county}, pe strada {street}, numarul {nr}, blocul {block}, scara {stair}, etajul {floor}, apartamentul {ap}.
                                     Poate fi gasit la nr. de telefon: {phone} si e-mail: {email}.
                                 </h4>
                             </div>
