@@ -197,6 +197,7 @@ export const CreateForms = () => {
       const response = await axios.post(url, output_data, { headers: headers });
       console.log(response.data); // Handle successful login
       console.log(output_data)
+      console.log(response.data.id);
       setFromID(response.data.id);
       sessionStorage.setItem('formID', response.data.id);
     } catch (error) {

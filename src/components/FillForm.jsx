@@ -32,17 +32,16 @@ export const FillForm = () => {
 
         const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${formID}/submissions/`;
         const headers = {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
+            Authorization: `Bearer ${token}`
         };
 
         // const output_data = {
         //     "submission_time": timeNow,
         //     "completed_dynamic_fields": {
         //         "cnp": cnp,
-        //         "name": name,
-        //         "lastname": lastName,
-        //         "location": location,
+        //         "nume": name,
+        //         "prenume": lastName,
+        //         "locatie": location,
         //         "street": street,
         //         "nr": nr,
         //         "block": block,
@@ -55,11 +54,12 @@ export const FillForm = () => {
         //     }
         // }
 
-         const output_data = {
+        const output_data = {
             "completed_dynamic_fields": {
-                "cnp": timeNow,
-                "name": "Valentin",
-                "address": "7353 South St. Braintree, MA 02184"
+              "prenume": "Alex",
+              "nume": "Olar",
+              "an": "2002",
+              "cnp": 1234,
             }
         }
 
