@@ -30,6 +30,7 @@ export const SignUpForm = () => {
       console.log(response.data); // Handle successful login
       console.log(dataa)
       navigate("/");
+      alert("Sign Up Success!")
     } catch (error) {
       setError(error.response.data.message);
     }

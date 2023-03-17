@@ -34,7 +34,7 @@ export const LoginForm = () => {
       sessionStorage.setItem('token', response.data.access_token);
       sessionStorage.setItem('id', response.data.user_id);
       navigate("/");
-      alert("Login Succes!");
+      alert("Login Success!");
     } catch (error) {
       setError(error.response.data.message);
     }
