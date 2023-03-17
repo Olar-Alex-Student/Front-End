@@ -56,9 +56,8 @@ export const FillForm = () => {
         // }
 
          const output_data = {
-            "submission_time": timeNow,
             "completed_dynamic_fields": {
-                "cnp": 1234567890,
+                "cnp": timeNow,
                 "name": "Valentin",
                 "address": "7353 South St. Braintree, MA 02184"
             }
@@ -69,12 +68,16 @@ export const FillForm = () => {
             const response = await axios.post(url, output_data, { headers: headers });
             console.log(response.data); // Handle successful login
             console.log(output_data);
+            console.log(formID);
+            console.log(id)
         } catch (error) {
             console.log('error'); // error.response.data.message
             console.error(error);
             console.log(error.response.status); // logs the status code
             console.log(error.response.data);
             console.log(output_data);
+            console.log(formID);
+            console.log(id)
             // console.log(error)
         }
     }

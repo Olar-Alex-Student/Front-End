@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGroup, Tab } from 'react-bootstrap';
 import axios from "axios";
 import JoditEditor from 'jodit-react';
-import {LoginForm} from './LoginForm';
 
 export const CreateForms = () => {
 
@@ -189,7 +188,7 @@ export const CreateForms = () => {
     const dynamic_fields_array = json2array(dynamic_fields)
     const output_data = {
       "title": title,
-      "delete_form_date": Math.floor(Date.now() / 1000 + 86400 * data_retension_period), // 2592000 = 30 days Unix epoch time
+      "data_retention_period": Math.floor(Math.random() * 60) + 1,
       "sections": sections,
       "dynamic_fields": dynamic_fields_array
     }
