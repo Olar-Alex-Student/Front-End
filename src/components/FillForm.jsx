@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGroup, Tab } from 'react-bootstrap';
 import axios from "axios";
 import JoditEditor from 'jodit-react';
+import { useNavigate } from "react-router-dom";
 
 export const FillForm = () => {
+
+    const navigate = useNavigate();
 
     const [error, setError] = useState("");
 
@@ -62,6 +65,8 @@ export const FillForm = () => {
             console.log(output_data);
             console.log(formID);
             console.log(id)
+            navigate("/");
+            alert("Fill Form Done!");
         } catch (error) {
             console.log('error'); // error.response.data.message
             console.error(error);
