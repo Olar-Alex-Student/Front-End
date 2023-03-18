@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
-import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGroup, Tab } from 'react-bootstrap';
+import { useParams } from 'react-router-dom'
+import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGroup, Tab, Alert } from 'react-bootstrap';
 import axios from "axios";
 import JoditEditor from 'jodit-react';
 
 export const CreateForms = () => {
+  const { edit_id } = useParams()
 
   const [formID, setFromID] = useState("");
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -16,52 +17,41 @@ export const CreateForms = () => {
 
   const editor = useRef(null);
 
-  const [data_retension_period, setData_retension_period] = useState(30)
-
-  const [selectedSection, setSelectedSection] = useState(null);
-
-  const [scan_document_type, setScan_document_type] = useState('')
-  const [content, setContent] = useState('');
-
-  useEffect(() => {
-    console.log(content)
-  }, [content])
-
-  const [dynamic_fields, setDynamicFields] = useState({
-    'Nume': {
+  const [dynamic_fields, setDynamicFields] = useState([
+    {
       'placeholder': 'nume',
       'type': 'text',
       'mandatory': true,
       'keywords': 'Nume, Last name',
       'options': ''
     },
-    'Prenume': {
+    {
       'placeholder': 'prenume',
       'type': 'text',
       'mandatory': true,
       'keywords': 'Prenume, First name',
       'options': ''
     },
-    'CNP': {
+    {
       'placeholder': 'cnp',
       'type': 'text',
       'mandatory': true,
       'keywords': 'CNP, Social Number',
       'options': ''
     },
-    'An': {
+    {
       'placeholder': 'an',
       'type': 'single-choice',
       'mandatory': true,
       'keywords': 'An, Year',
-      'options': '2000, 2001'
+      'options': '2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024'
     }
-  });
+  ]);
 
   const [sections, setSections] = useState([
     {
       "scan_document_type": "student_card",
-      "text": "Studentul <nume> , din grupa , anul <an>."
+      "text": "Studentul {nume} , din grupa , anul [an]."
     },
     {
       "scan_document_type": "identity_card",
@@ -71,36 +61,74 @@ export const CreateForms = () => {
 
   const [title, setTitle] = useState('')
 
-  const [selectedLabel, setSelectedLabel] = useState('')
-  const [oldLabel, setOldLabel] = useState('')
+  const [selectedSection, setSelectedSection] = useState(null);
+  const [selectedDynamic_field, setSelectedDynamic_field] = useState(null)
 
-  const [label, setLabel] = useState('')
+  const [data_retention_period, setData_retention_period] = useState(30)
+  const [scan_document_type, setScan_document_type] = useState('')
+  const [content, setContent] = useState('');
+
   const [placeholder, setPlaceholder] = useState('')
   const [type, setType] = useState('')
   const [mandatory, setMandatory] = useState(false)
   const [keywords, setKeywords] = useState('')
   const [options, setOptions] = useState('')
 
-  useEffect(() => {
-    const updatedDynamicFields = { ...dynamic_fields };
-    if (oldLabel != label && oldLabel in updatedDynamicFields) {
-      updatedDynamicFields[label] = updatedDynamicFields[oldLabel];
-      delete updatedDynamicFields[oldLabel];
+  const [create, setCreate] = useState(true)
+
+  async function handleEdit() {
+    const params = new URLSearchParams(window.location.pathname);
+    console.log(params.get("ID"))
+
+    const token = sessionStorage.getItem('token');
+    const id = sessionStorage.getItem('id');
+    const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${edit_id}`;
+    const headers = { Authorization: `Bearer ${token}` };
+
+    try {
+      const response = await axios.get(url_edit, { headers: headers });
+      console.log(response.data); // Handle successful login
+      setFromID(response.data.id);
+
+      setTitle(response.data.title)
+      setData_retention_period(response.data.data_retention_period)
+      setDynamicFields(response.data.dynamic_fields)
+      setSections(response.data.sections)
+
+      sessionStorage.setItem('formID', response.data.id);
+    } catch (error) {
+      console.log('error'); // error.response.data.message
+      // setError(error.response.data.message)
+      // console.log(error)
     }
-    if (label in updatedDynamicFields) {
-      updatedDynamicFields[label].placeholder = placeholder;
-      updatedDynamicFields[label].type = type;
-      updatedDynamicFields[label].mandatory = mandatory;
-      updatedDynamicFields[label].keywords = keywords;
-      updatedDynamicFields[label].options = options;
-      setDynamicFields(updatedDynamicFields);
-    }
-  }, [label, placeholder, type, mandatory, keywords, options]);
+  };
 
   useEffect(() => {
-    const updatedSections = sections.map((section, i) => {
-      if (i === selectedSection) {
-        return { ...section, text: content, scan_document_type: scan_document_type };
+    let ignore = false;
+
+    if (!ignore) {
+      handleEdit()
+      if (window.location.pathname.includes('edit'))
+        setCreate(false)
+    }
+
+    return () => { ignore = true; }
+  }, []);
+
+  useEffect(() => {
+    const updatedDynamicFields = dynamic_fields.map((dynamic_field, index) => {
+      if (index === selectedDynamic_field) {
+        return { ...dynamic_field, "placeholder": placeholder, "type": type, "mandatory": mandatory, "keywords": keywords, "options": options };
+      }
+      return dynamic_field;
+    });
+    setDynamicFields(updatedDynamicFields);
+  }, [placeholder, type, mandatory, keywords, options]);
+
+  useEffect(() => {
+    const updatedSections = sections.map((section, index) => {
+      if (index === selectedSection) {
+        return { ...section, "text": content, "scan_document_type": scan_document_type };
       }
       return section;
     });
@@ -108,15 +136,13 @@ export const CreateForms = () => {
 
   }, [content, scan_document_type]);
 
-  function loadDynamicField(event, key) {
+  function loadDynamicField(event, index) {
     event.preventDefault();
-    setOldLabel(key);
-    setLabel(key);
-    setPlaceholder(dynamic_fields[key].placeholder);
-    setType(dynamic_fields[key].type)
-    setMandatory(dynamic_fields[key].mandatory);
-    setKeywords(dynamic_fields[key].keywords);
-    setOptions(dynamic_fields[key].options);
+    setPlaceholder(dynamic_fields[index].placeholder);
+    setType(dynamic_fields[index].type)
+    setMandatory(dynamic_fields[index].mandatory);
+    setKeywords(dynamic_fields[index].keywords);
+    setOptions(dynamic_fields[index].options);
   }
 
   function loadSections(event, index) {
@@ -125,17 +151,17 @@ export const CreateForms = () => {
     setScan_document_type(sections[index].scan_document_type)
   }
 
-  function addNewLabel() {
-    setDynamicFields({ ...dynamic_fields, [`NEW ${Object.keys(dynamic_fields).length + 1}`]: { 'placeholder': '', 'type': '', 'mandatory': false, 'keywords': '', 'options': '' } });
+  function addNewDynamicField() {
+    setDynamicFields([...dynamic_fields, { 'placeholder': `NEW ${dynamic_fields.length + 1}`, 'type': '', 'mandatory': false, 'keywords': '', 'options': '' }]);
   }
 
   function addNewSection() {
     setSections([...sections, { 'scan_document_type': '', 'text': '' }]);
   }
 
-  function deleteLabel() {
-    const updatedDynamicFields = { ...dynamic_fields };
-    delete updatedDynamicFields[selectedLabel];
+  function deleteDynamic_field() {
+    const updatedDynamicFields = [...dynamic_fields];
+    delete updatedDynamicFields[selectedDynamic_field];
     setDynamicFields(updatedDynamicFields);
   }
 
@@ -145,30 +171,21 @@ export const CreateForms = () => {
     setSections(updatedSections);
   }
 
-  function json2array(json) {
-    var result = [];
-    var keys = Object.keys(json);
-    keys.forEach(function (key) {
-      result.push(json[key]);
-    });
-    return result;
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
 
     const token = sessionStorage.getItem('token');
     const id = sessionStorage.getItem('id');
     const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/`;
-    const headers = {Authorization: `Bearer ${token}`};
+    const headers = { Authorization: `Bearer ${token}` };
 
     console.log(token)
 
-    Object.entries(dynamic_fields).forEach(([key, value]) => {
-      const options_array = dynamic_fields[key].options.toString().split(',')
+    dynamic_fields.forEach((dynamic_field, index) => {
+      const options_array = dynamic_field.options.toString().split(',')
       const options_trimmedArray = [];
 
-      const keywords_array = dynamic_fields[key].keywords.toString().split(',')
+      const keywords_array = dynamic_field.keywords.toString().split(',')
       const keywords_trimmedArray = [];
 
       for (let i = 0; i < options_array.length; i++) {
@@ -181,29 +198,30 @@ export const CreateForms = () => {
         keywords_trimmedArray.push(keywords_trimmedElement);
       }
 
-      dynamic_fields[key].options = options_trimmedArray
-      dynamic_fields[key].keywords = keywords_trimmedArray
+      dynamic_field.options = options_trimmedArray
+      dynamic_field.keywords = keywords_trimmedArray
     })
     console.log(dynamic_fields)
-    const dynamic_fields_array = json2array(dynamic_fields)
     const output_data = {
       "title": title,
       "data_retention_period": Math.floor(Math.random() * 60) + 1,
       "sections": sections,
-      "dynamic_fields": dynamic_fields_array
+      "dynamic_fields": dynamic_fields
     }
     console.log(output_data)
     try {
-      const response = await axios.post(url, output_data, { headers: headers });
+      if (create) {
+        const response = await axios.post(url, output_data, { headers: headers });
+
+      }
       console.log(response.data); // Handle successful login
       console.log(output_data)
       console.log(response.data.id);
       setFromID(response.data.id);
       sessionStorage.setItem('formID', response.data.id);
     } catch (error) {
-      console.log('error'); // error.response.data.message
-      setError(error.response.data.message)
-      // console.log(error)
+      console.log('error', error); // error.response.data.message
+      setError(error.message)
     }
   };
 
@@ -212,36 +230,36 @@ export const CreateForms = () => {
       <div className="container d-flex justify-content-center p-4">
         <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
           <div className="title text-secondary fw-bold">
-            <span>Create Form</span>
+            <span>{create ? "Create" : "Edit"} Form</span>
           </div>
           <Container>
             <form className="row g-3 p-3 rounded-5 bg-secondary">
               <div className="col-lg-12 mb-3">
                 <Form.Label>Title</Form.Label>
-                <Form.Control className="mb-3" type="text" placeholder="Title" onChange={(e) => { setTitle(e.target.value) }} />
+                <Form.Control className="mb-3" type="text" placeholder="Title" value={title} onChange={(e) => { setTitle(e.target.value) }} />
                 {/* <label htmlFor="input-title" className="form-label">Title</label>
                 <input type="text" className="form-control" id="input-title" placeholder="Title" /> */}
               </div>
               <div className="col-lg-6 mb-3">
                 <Form.Label>Dynamic Fields</Form.Label>
                 <ListGroup>
-                  {Object.keys(dynamic_fields).map((key, i) => (
-                    <ListGroup.Item key={key} action onClick={(event) => { loadDynamicField(event, key); setSelectedLabel(key) }}>{key}</ListGroup.Item>
+                  {dynamic_fields.map((element, index) => (
+                    <ListGroup.Item key={index} action onClick={(event) => { loadDynamicField(event, index); setSelectedDynamic_field(index) }}>{element['placeholder']}</ListGroup.Item>
                   ))}
                 </ListGroup>
                 <div className='d-flex align-items-center justify-content-around'>
-                  <Button className='m-3 custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' variant="primary" onClick={addNewLabel}>Add new</Button>
-                  <Button className='m-3 custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' variant="primary" onClick={deleteLabel}>Delete</Button>
+                  <Button className='m-3 custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' variant="primary" onClick={addNewDynamicField}>Add new</Button>
+                  <Button className='m-3 custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' variant="primary" onClick={deleteDynamic_field}>Delete</Button>
                 </div>
               </div>
               <div className="col-lg-6 mb-3">
-                <Form.Label>Label</Form.Label>
-                <Form.Control className="mb-3" type="text" placeholder="Label" value={label} onChange={(e) => { setOldLabel(label); setLabel(e.target.value) }} />
+                {/* <Form.Label>Label</Form.Label>
+                <Form.Control className="mb-3" type="text" placeholder="Label" value={label} onChange={(e) => { setOldLabel(label); setLabel(e.target.value) }} /> */}
                 <Form.Label>Placeholder keyword</Form.Label>
                 <Form.Control className="mb-3" type="text" placeholder="Placeholder keyword" value={placeholder} onChange={(e) => setPlaceholder(e.target.value)} />
                 <Form.Label>Type</Form.Label>
                 <Form.Select className="mb-3" value={type} onChange={(e) => setType(e.target.value)}>
-                  <option>Type</option>
+                  {/* <option>Type</option> */}
                   <option value="text">Text</option>
                   <option value="number">Number</option>
                   <option value="decimal">Decimal</option>
@@ -270,8 +288,8 @@ export const CreateForms = () => {
                   <Button className='m-3 custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' variant="primary" onClick={addNewSection}>Add new</Button>
                   <Button className='m-3 custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' variant="primary" onClick={deleteSection}>Delete</Button>
                 </div>
-                <Form.Label>Data Retension Period</Form.Label>
-                <Form.Control className="mb-3" type="number" placeholder="Data Retension Period" value={data_retension_period} onChange={(e) => setData_retension_period(Math.max(1, Math.min(60, Number(e.target.value))))} />
+                <Form.Label>Data Retention Period</Form.Label>
+                <Form.Control className="mb-3" type="number" placeholder="Data Retention Period" value={data_retention_period} onChange={(e) => setData_retention_period(Math.max(1, Math.min(60, Number(e.target.value))))} />
               </div>
               <div className="col-lg-6 mb-3">
                 <Form.Label>Content</Form.Label>
@@ -295,7 +313,7 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => {handleSubmit(e); handleShow()}}>Create!</Button>
+                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); handleShow() }}>Create!</Button>
                 </div>
               </div>
 
@@ -308,15 +326,13 @@ export const CreateForms = () => {
                   <Button href="/" variant="secondary">
                     Go Back Home
                   </Button>
-                  <Button href="/forms/create/fill" variant="primary">
+                  <Button href={`/forms/fill/${formID}`} variant="primary">
                     Fill Form
                   </Button>
                 </Modal.Footer>
               </Modal>
-
             </form>
           </Container>
-          {error && <div>{error}</div>}
         </div>
       </div>
     </>

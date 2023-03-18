@@ -23,7 +23,6 @@ export const Forms = () => {
   const id = sessionStorage.getItem('id');
   const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/`;
   const headers = {
-    // 'accept': 'application/json',
     Authorization: `Bearer ${token}`
   };
 
@@ -35,9 +34,9 @@ export const Forms = () => {
       setTitles(response.data['form_list'])
       console.log(titles)
       console.log('success')
-    } catch (err) {
-      console.log('error'); // error.response.data.message
-      console.log(err)
+    } catch (error) {
+      console.log('error', error); // error.response.data.message
+      setError(error.message)
     }
   };
 
@@ -49,32 +48,11 @@ export const Forms = () => {
       setQrcode(response.data);
       console.log('deleted')
       window.location.reload(false);
-    } catch (err) {
-      console.log('error'); // error.response.data.message
-      console.log(err)
+    } catch (error) {
+      console.log('error', error); // error.response.data.message
+      setError(error.message)
     }
   };
-
-  // async function handleQrCode() {
-  //   const qrcode_url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/utilitygetQrCode/${window.location.href}/forms/fill/${currentID}`;
-  //   console.log(qrcode_url)
-  //   try {
-  //     const response = await axios.get(qrcode_url, { headers: headers });
-  //     console.log(response.data); // Handle successful login
-  //     console.log('qrcode')
-
-  //     console.log(atob(response.data))
-
-  //     image.onload = function(){
-  //         URL.revokeObjectURL(this.src); // release the blob URL once the image is loaded
-  //     }
-  //     image.src = blobURL;
-
-  //   } catch (err) {
-  //     console.log('error'); // error.response.data.message
-  //     console.log(err)
-  //   }
-  // };
 
   useEffect(() => {
     let ignore = false;
@@ -116,7 +94,7 @@ export const Forms = () => {
                         <div className='d-flex gap-3 justify-content-end'>
                           <Button onClick={() => { handleShow_qrcode(); setCurrentID(title['id']); setQrcode(`${window.location.href}/fill/${currentID}`) }} className="rounded-pill fw-bold btn-info btn-sm px-3">QR Code</Button>
                           <Button href={`/forms/fill/${title['id']}`} className="rounded-pill fw-bold btn-success btn-sm px-3">Fill</Button>
-                          <Button href={`/forms/create/${title['id']}`} className="rounded-pill fw-bold btn-warning btn-sm px-3">Edit</Button>
+                          <Button href={`/forms/edit/${title['id']}`} className="rounded-pill fw-bold btn-warning btn-sm px-3">Edit</Button>
                           <Button onClick={() => { handleShow(); setCurrentID(title['id']) }} className="rounded-pill fw-bold btn-danger btn-sm px-3">Delete</Button>
                         </div>
                       </td>
