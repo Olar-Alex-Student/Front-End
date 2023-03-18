@@ -33,7 +33,7 @@ function App() {
                 </Nav.Item>
 
                 <Nav.Item>
-                  <Nav.Link as={Link} to={'/create'} className='text-secondary rounded-pill'>Create</Nav.Link>
+                  <Nav.Link as={Link} to={'/forms/create'} className='text-secondary rounded-pill'>Create</Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
