@@ -14,6 +14,9 @@ export const CreateForms = () => {
   const handleShow = () => setShow(true);
 
   const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+  const handleCloseError = () => setShowError(false);
+  const handleShowError = () => setShowError(true);
 
   const editor = useRef(null);
 
@@ -97,9 +100,9 @@ export const CreateForms = () => {
 
       sessionStorage.setItem('formID', response.data.id);
     } catch (error) {
-      console.log('error'); // error.response.data.message
-      // setError(error.response.data.message)
-      // console.log(error)
+      console.log('error', error); // error.response.data.message
+      setError(error.message)
+      handleShowError()
     }
   };
 
@@ -222,11 +225,20 @@ export const CreateForms = () => {
     } catch (error) {
       console.log('error', error); // error.response.data.message
       setError(error.message)
+      handleShowError()
     }
   };
 
   return (
     <>
+      {showError ?
+        <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
+          <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+          <p>
+            {error}
+          </p>
+        </Alert>
+        : null}
       <div className="container d-flex justify-content-center p-4">
         <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
           <div className="title text-secondary fw-bold">

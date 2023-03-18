@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, Nav, Button, Table, Container, Modal } from 'react-bootstrap';
+import { Navbar, Nav, Button, Table, Container, Modal, Alert } from 'react-bootstrap';
 import axios from "axios";
 import QRCode from 'react-qr-code';
 
@@ -15,6 +15,9 @@ export const Forms = () => {
   const [qrcode, setQrcode] = useState('');
 
   const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+  const handleCloseError = () => setShowError(false);
+  const handleShowError = () => setShowError(true);
 
   const [titles, setTitles] = useState([]);
   const [currentID, setCurrentID] = useState('');
@@ -37,6 +40,7 @@ export const Forms = () => {
     } catch (error) {
       console.log('error', error); // error.response.data.message
       setError(error.message)
+      handleShowError()
     }
   };
 
@@ -51,6 +55,7 @@ export const Forms = () => {
     } catch (error) {
       console.log('error', error); // error.response.data.message
       setError(error.message)
+      handleShowError()
     }
   };
 
@@ -63,6 +68,14 @@ export const Forms = () => {
 
   return (
     <>
+      {showError ?
+        <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
+          <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+          <p>
+            {error}
+          </p>
+        </Alert>
+        : null}
       <div className="container d-flex justify-content-center p-4">
         <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
           <div className="title text-secondary fw-bold">
