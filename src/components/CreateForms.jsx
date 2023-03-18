@@ -213,10 +213,8 @@ export const CreateForms = () => {
     }
     console.log(output_data)
     try {
-      if (create) {
-        const response = await axios.post(url, output_data, { headers: headers });
-
-      }
+      // if (create)
+      const response = await axios.post(url, output_data, { headers: headers });
       console.log(response.data); // Handle successful login
       console.log(output_data)
       console.log(response.data.id);
