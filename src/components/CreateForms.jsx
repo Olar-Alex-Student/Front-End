@@ -303,7 +303,7 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-6 mb-3">
                 <Form.Label>Content</Form.Label>
-                <JoditEditor
+                <JoditEditor className="mb-3"
                   ref={editor}
                   value={content}
                   onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons

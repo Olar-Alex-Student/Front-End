@@ -33,16 +33,16 @@ function App() {
                 </Nav.Item>
 
                 <Nav.Item>
-                  <Nav.Link as={Link} to={'/history'} className='text-secondary rounded-pill'>History</Nav.Link>
+                  <Nav.Link as={Link} to={'/create'} className='text-secondary rounded-pill'>Create</Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
-                  <Nav.Link as={Link} to={'/forms'} className='text-secondary rounded-pill'>Forms</Nav.Link>
+                  <Nav.Link as={Link} to={'/forms'} className='text-secondary rounded-pill'>Browse</Nav.Link>
                 </Nav.Item>
 
-                <Nav.Item>
+                {/* <Nav.Item>
                   <Nav.Link as={Link} to={'/upgrade'} className='text-secondary rounded-pill'>Upgrade</Nav.Link>
-                </Nav.Item>
+                </Nav.Item> */}
 
                 <Nav.Item>
                   <Nav.Link as={Link} to={'/login'} className='text-secondary rounded-pill'>Login</Nav.Link>
