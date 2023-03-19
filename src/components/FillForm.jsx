@@ -20,9 +20,12 @@ export const FillForm = () => {
     const [title, setTitle] = useState('');
     const [dynamic_fields, setDynamicFields] = useState([]);
     const [sections, setSections] = useState([]);
+    const [sectionsDisplay, setSectionsDisplay] = useState([]);
 
-    function createOnChange(event, id) {
-        console.log('createOnChange')
+    function valueChange(event, id) {
+        console.log('valueChange-------------------------------------------------------------')
+        setSectionsDisplay(sections)
+        console.log('----', sections[0]['text'])
         Object.keys(values).forEach((key, index) => {
             if (key == id) {
                 const updatedValues = values
@@ -31,6 +34,18 @@ export const FillForm = () => {
                 console.log(updatedValues)
             }
         });
+        const updatedSections = JSON.parse(JSON.stringify(sectionsDisplay));
+        sections.forEach((element, index) => {
+            let newText = element['text']
+            Object.keys(values).forEach((key, index_value) => {
+                if(values[key] != '' && newText.includes(`{${key}}`))
+                {
+                    newText = newText.replace(`{${key}}`, values[key])
+                    updatedSections[index]['text'] = newText
+                    setSectionsDisplay(updatedSections);
+                }
+            });
+        })
     }
 
     function handleValues(dynamic_fields_response) {
@@ -55,6 +70,7 @@ export const FillForm = () => {
             setDynamicFields(response.data.dynamic_fields)
             handleValues(response.data.dynamic_fields)
             setSections(response.data.sections)
+            setSectionsDisplay(response.data.sections)
         } catch (error) {
             console.log('error', error); // error.response.data.message
             setError(error.message)
@@ -88,8 +104,8 @@ export const FillForm = () => {
         try {
             const response = await axios.post(url, output_data, { headers: headers });
             console.log(response.data); // Handle successful login
-            navigate("/");
             alert("Fill Form Done!");
+            navigate("/");
         } catch (error) {
             console.log('error', error);
             setError(error.message)
@@ -125,19 +141,20 @@ export const FillForm = () => {
                                             {/* <ListGroup.Item key={index} action onClick={(event) => { loadDynamicField(event, index); setSelectedDynamic_field(index) }}>{element['label']}</ListGroup.Item> */}
                                             <Form.Label>{element['label']}</Form.Label>
                                             {element['type'] == 'single-choice' ?
-                                                <Form.Select key={element['placeholder']} className="mb-3" onChange={(event) => createOnChange(event, element['placeholder'])}>
+                                                <Form.Select key={element['placeholder']} className="mb-3" onChange={(event) => valueChange(event, element['placeholder'])}>
+                                                    <option>Select an option</option>
                                                     {element['options'].map((option, index) => (
                                                         <option value={option}>{option}</option>
                                                     ))}
                                                 </Form.Select>
-                                                : <Form.Control key={element['placeholder']} className="mb-3" type={element['type']} placeholder={element['label']} onChange={(event) => createOnChange(event, element['placeholder'])} />
+                                                : <Form.Control key={element['placeholder']} className="mb-3" type={element['type']} placeholder={element['label']} onChange={(event) => valueChange(event, element['placeholder'])} />
                                             }
                                         </>
                                     ))}
 
                                 </div>
                                 <div className="col-lg-6 mb-3 bg-white rounded-2 border border-danger-subtle">
-                                    {sections.map((element, index) => (
+                                    {sectionsDisplay.map((element, index) => (
                                         <p>{element['text']}</p>
                                     ))}
                                 </div>
