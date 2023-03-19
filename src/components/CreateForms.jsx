@@ -5,7 +5,7 @@ import axios from "axios";
 import JoditEditor from 'jodit-react';
 
 export const CreateForms = () => {
-  const { edit_id } = useParams()
+  const { form_id_url } = useParams()
 
   const [formID, setFromID] = useState("");
 
@@ -40,7 +40,7 @@ export const CreateForms = () => {
     {
       'label': 'CNP',
       'placeholder': 'cnp',
-      'type': 'text',
+      'type': 'number',
       'mandatory': true,
       'keywords': 'CNP, Social Number',
       'options': ''
@@ -87,14 +87,13 @@ export const CreateForms = () => {
   async function handleEdit() {
     const token = sessionStorage.getItem('token');
     const id = sessionStorage.getItem('id');
-    const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${edit_id}`;
+    const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${form_id_url}`;
     const headers = { Authorization: `Bearer ${token}` };
 
     try {
       const response = await axios.get(url_edit, { headers: headers });
       console.log(response.data); // Handle successful login
       setFromID(response.data.id);
-
       setTitle(response.data.title)
       setData_retention_period(response.data.data_retention_period)
       setDynamicFields(response.data.dynamic_fields)
@@ -121,21 +120,21 @@ export const CreateForms = () => {
   }, []);
 
   useEffect(() => {
-    const updatedDynamicFields = dynamic_fields.map((dynamic_field, index) => {
+    const updatedDynamicFields = dynamic_fields.map((dynamic_field_temp, index) => {
       if (index === selectedDynamic_field) {
-        return { ...dynamic_field, "label": label, "placeholder": placeholder, "type": type, "mandatory": mandatory, "keywords": keywords, "options": options };
+        return { ...dynamic_field_temp, "label": label, "placeholder": placeholder, "type": type, "mandatory": mandatory, "keywords": keywords, "options": options };
       }
-      return dynamic_field;
+      return dynamic_field_temp;
     });
     setDynamicFields(updatedDynamicFields);
   }, [label, placeholder, type, mandatory, keywords, options]);
 
   useEffect(() => {
-    const updatedSections = sections.map((section, index) => {
+    const updatedSections = sections.map((section_temp, index) => {
       if (index === selectedSection) {
-        return { ...section, "text": content, "scan_document_type": scan_document_type };
+        return { ...section_temp, "text": content, "scan_document_type": scan_document_type };
       }
-      return section;
+      return section_temp;
     });
     setSections(updatedSections);
   }, [content, scan_document_type]);
@@ -224,7 +223,7 @@ export const CreateForms = () => {
       }
       else
       {
-        const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${edit_id}`;
+        const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${form_id_url}`;
         const response = await axios.put(url_edit, output_data, { headers: headers });
         console.log(response.data); // Handle successful login
         console.log(response.data.id);

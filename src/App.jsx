@@ -57,9 +57,9 @@ function App() {
           <Route path='/forms'>
             <Route index element={<Forms />} />
             <Route path='create' element={<CreateForms />} />
-            <Route path='fill/*' element={<FillForm />} />
+            <Route path='fill/:form_id_url' element={<FillForm />} />
             <Route path='edit' element={<CreateForms />} />
-            <Route path='edit/:edit_id' element={<CreateForms />} />
+            <Route path='edit/:form_id_url' element={<CreateForms />} />
           </Route>
           <Route path='/upgrade' element={<Upgrade />} />
           <Route path='/login' element={<Login />} />
