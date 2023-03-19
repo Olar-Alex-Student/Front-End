@@ -22,6 +22,7 @@ export const CreateForms = () => {
 
   const [dynamic_fields, setDynamicFields] = useState([
     {
+      'label': 'Nume',
       'placeholder': 'nume',
       'type': 'text',
       'mandatory': true,
@@ -29,6 +30,7 @@ export const CreateForms = () => {
       'options': ''
     },
     {
+      'label': 'Prenume',
       'placeholder': 'prenume',
       'type': 'text',
       'mandatory': true,
@@ -36,6 +38,7 @@ export const CreateForms = () => {
       'options': ''
     },
     {
+      'label': 'CNP',
       'placeholder': 'cnp',
       'type': 'text',
       'mandatory': true,
@@ -43,6 +46,7 @@ export const CreateForms = () => {
       'options': ''
     },
     {
+      'label': 'An',
       'placeholder': 'an',
       'type': 'single-choice',
       'mandatory': true,
@@ -54,11 +58,11 @@ export const CreateForms = () => {
   const [sections, setSections] = useState([
     {
       "scan_document_type": "student_card",
-      "text": "Studentul {nume} , din grupa , anul [an]."
+      "text": "Studentul {nume} {prenume}, din grupa , anul {an}."
     },
     {
       "scan_document_type": "identity_card",
-      "text": "Cu CNP <cnp>, seria , nr."
+      "text": "Cu CNP {cnp}, seria , nr."
     }
   ]);
 
@@ -71,6 +75,7 @@ export const CreateForms = () => {
   const [scan_document_type, setScan_document_type] = useState('')
   const [content, setContent] = useState('');
 
+  const [label, setLabel] = useState('')
   const [placeholder, setPlaceholder] = useState('')
   const [type, setType] = useState('')
   const [mandatory, setMandatory] = useState(false)
@@ -80,9 +85,6 @@ export const CreateForms = () => {
   const [create, setCreate] = useState(true)
 
   async function handleEdit() {
-    const params = new URLSearchParams(window.location.pathname);
-    console.log(params.get("ID"))
-
     const token = sessionStorage.getItem('token');
     const id = sessionStorage.getItem('id');
     const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${edit_id}`;
@@ -97,8 +99,6 @@ export const CreateForms = () => {
       setData_retention_period(response.data.data_retention_period)
       setDynamicFields(response.data.dynamic_fields)
       setSections(response.data.sections)
-
-      sessionStorage.setItem('formID', response.data.id);
     } catch (error) {
       console.log('error', error); // error.response.data.message
       setError(error.message)
@@ -110,9 +110,11 @@ export const CreateForms = () => {
     let ignore = false;
 
     if (!ignore) {
-      handleEdit()
       if (window.location.pathname.includes('edit'))
+      {
+        handleEdit()
         setCreate(false)
+      }
     }
 
     return () => { ignore = true; }
@@ -121,12 +123,12 @@ export const CreateForms = () => {
   useEffect(() => {
     const updatedDynamicFields = dynamic_fields.map((dynamic_field, index) => {
       if (index === selectedDynamic_field) {
-        return { ...dynamic_field, "placeholder": placeholder, "type": type, "mandatory": mandatory, "keywords": keywords, "options": options };
+        return { ...dynamic_field, "label": label, "placeholder": placeholder, "type": type, "mandatory": mandatory, "keywords": keywords, "options": options };
       }
       return dynamic_field;
     });
     setDynamicFields(updatedDynamicFields);
-  }, [placeholder, type, mandatory, keywords, options]);
+  }, [label, placeholder, type, mandatory, keywords, options]);
 
   useEffect(() => {
     const updatedSections = sections.map((section, index) => {
@@ -136,11 +138,11 @@ export const CreateForms = () => {
       return section;
     });
     setSections(updatedSections);
-
   }, [content, scan_document_type]);
 
   function loadDynamicField(event, index) {
     event.preventDefault();
+    setLabel(dynamic_fields[index].label)
     setPlaceholder(dynamic_fields[index].placeholder);
     setType(dynamic_fields[index].type)
     setMandatory(dynamic_fields[index].mandatory);
@@ -155,7 +157,7 @@ export const CreateForms = () => {
   }
 
   function addNewDynamicField() {
-    setDynamicFields([...dynamic_fields, { 'placeholder': `NEW ${dynamic_fields.length + 1}`, 'type': '', 'mandatory': false, 'keywords': '', 'options': '' }]);
+    setDynamicFields([...dynamic_fields, { 'label': `NEW ${dynamic_fields.length + 1}`, 'placeholder': '', 'type': '', 'mandatory': false, 'keywords': '', 'options': '' }]);
   }
 
   function addNewSection() {
@@ -207,21 +209,29 @@ export const CreateForms = () => {
     console.log(dynamic_fields)
     const output_data = {
       "title": title,
-      "data_retention_period": Math.floor(Math.random() * 60) + 1,
+      "data_retention_period": data_retention_period,
       "sections": sections,
       "dynamic_fields": dynamic_fields
     }
     console.log(output_data)
     try {
-      // if (create)
-      const response = await axios.post(url, output_data, { headers: headers });
-      console.log(response.data); // Handle successful login
-      console.log(output_data)
-      console.log(response.data.id);
-      setFromID(response.data.id);
-      sessionStorage.setItem('formID', response.data.id);
+      if (create)
+      {
+        const response = await axios.post(url, output_data, { headers: headers });
+        console.log(response.data); // Handle successful login
+        console.log(response.data.id);
+        setFromID(response.data.id);
+      }
+      else
+      {
+        const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${edit_id}`;
+        const response = await axios.put(url_edit, output_data, { headers: headers });
+        console.log(response.data); // Handle successful login
+        console.log(response.data.id);
+        setFromID(response.data.id);
+      }
     } catch (error) {
-      console.log('error', error); // error.response.data.message
+      console.log('error', error);
       setError(error.message)
       handleShowError()
     }
@@ -254,7 +264,7 @@ export const CreateForms = () => {
                 <Form.Label>Dynamic Fields</Form.Label>
                 <ListGroup>
                   {dynamic_fields.map((element, index) => (
-                    <ListGroup.Item key={index} action onClick={(event) => { loadDynamicField(event, index); setSelectedDynamic_field(index) }}>{element['placeholder']}</ListGroup.Item>
+                    <ListGroup.Item key={index} action onClick={(event) => { loadDynamicField(event, index); setSelectedDynamic_field(index) }}>{element['label']}</ListGroup.Item>
                   ))}
                 </ListGroup>
                 <div className='d-flex align-items-center justify-content-around'>
@@ -263,8 +273,8 @@ export const CreateForms = () => {
                 </div>
               </div>
               <div className="col-lg-6 mb-3">
-                {/* <Form.Label>Label</Form.Label>
-                <Form.Control className="mb-3" type="text" placeholder="Label" value={label} onChange={(e) => { setOldLabel(label); setLabel(e.target.value) }} /> */}
+                <Form.Label>Label</Form.Label>
+                <Form.Control className="mb-3" type="text" placeholder="Label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
                 <Form.Label>Placeholder keyword</Form.Label>
                 <Form.Control className="mb-3" type="text" placeholder="Placeholder keyword" value={placeholder} onChange={(e) => setPlaceholder(e.target.value)} />
                 <Form.Label>Type</Form.Label>
@@ -323,7 +333,7 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); handleShow() }}>Create!</Button>
+                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); handleShow() }}>{create ? "Create" : "Edit"}!</Button>
                 </div>
               </div>
 
