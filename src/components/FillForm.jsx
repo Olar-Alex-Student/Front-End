@@ -23,11 +23,10 @@ export const FillForm = () => {
 
     function createOnChange(event, id) {
         console.log('createOnChange')
-        Object.keys(values).forEach((key, val) => {
-            console.log(id, key, val, event.target.value)
+        Object.keys(values).forEach((key, index) => {
             if (key == id) {
                 const updatedValues = values
-                updatedValues[key] = 'test'
+                updatedValues[key] = event.target.value
                 setValues(updatedValues);
                 console.log(updatedValues)
             }
@@ -35,9 +34,10 @@ export const FillForm = () => {
     }
 
     function handleValues(dynamic_fields_response) {
-        const newValues = dynamic_fields.map((element, index) => {
-            return { [`${element['placeholder']}`]: '' };
-        })
+        const newValues = {};
+        dynamic_fields_response.forEach(field => {
+            newValues[field.placeholder] = '';
+        });
         setValues(newValues)
         console.log(newValues)
     }
@@ -75,53 +75,26 @@ export const FillForm = () => {
 
         const token = sessionStorage.getItem('token');
         const id = sessionStorage.getItem('id');
-        const formID = sessionStorage.getItem('formID');
-
-        const timeNow = Math.floor(Date.now() / 1000);
-
-        const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${formID}/submissions/`;
+        const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${form_id_url}/submissions/`;
         const headers = {
             Authorization: `Bearer ${token}`
         };
 
         const output_data = {
-            "completed_dynamic_fields": {
-                "prenume": name,
-                "nume": lastName,
-                "an": year,
-                "cnp": cnp,
-                "locatie": location,
-                "strada": street,
-                "numar": nr,
-                "bloc": block,
-                "scara": stair,
-                "etaj": floor,
-                "apartament": ap,
-                "judet": county,
-                "email": email,
-                "telefon": phone
-            }
+            "completed_dynamic_fields": values
         }
 
-
+        console.log(output_data);
         try {
             const response = await axios.post(url, output_data, { headers: headers });
             console.log(response.data); // Handle successful login
-            console.log(output_data);
-            console.log(formID);
-            console.log(id)
             navigate("/");
             alert("Fill Form Done!");
         } catch (error) {
-            console.log('error'); // error.response.data.message
-            console.error(error);
-            console.log(error.response.status); // logs the status code
-            console.log(error.response.data);
-            console.log(output_data);
-            console.log(formID);
-            console.log(id)
+            console.log('error', error);
+            setError(error.message)
+            handleShowError()
             alert("Please Fill All The Input Fields");
-            // console.log(error)
         }
     }
 
@@ -152,12 +125,12 @@ export const FillForm = () => {
                                             {/* <ListGroup.Item key={index} action onClick={(event) => { loadDynamicField(event, index); setSelectedDynamic_field(index) }}>{element['label']}</ListGroup.Item> */}
                                             <Form.Label>{element['label']}</Form.Label>
                                             {element['type'] == 'single-choice' ?
-                                                <Form.Select className="mb-3" onChange={(event) => createOnChange(event, element['placeholder'])}>
+                                                <Form.Select key={element['placeholder']} className="mb-3" onChange={(event) => createOnChange(event, element['placeholder'])}>
                                                     {element['options'].map((option, index) => (
                                                         <option value={option}>{option}</option>
                                                     ))}
                                                 </Form.Select>
-                                                : <Form.Control className="mb-3" type={element['type']} placeholder={element['label']} onChange={(event) => createOnChange(event, element['placeholder'])} />
+                                                : <Form.Control key={element['placeholder']} className="mb-3" type={element['type']} placeholder={element['label']} onChange={(event) => createOnChange(event, element['placeholder'])} />
                                             }
                                         </>
                                     ))}
