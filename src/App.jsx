@@ -59,7 +59,7 @@ function App() {
             <Route index element={<Forms />} />
             <Route path='create' element={<CreateForms />} />
             <Route path='fill/:form_id_url' element={<FillForm />} />
-            <Route path='form-recogmizer' element={<FormRecognizer/>}/>
+            <Route path='form-recognizer' element={<FormRecognizer/>}/>
             <Route path='edit' element={<CreateForms />} />
             <Route path='edit/:form_id_url' element={<CreateForms />} />
           </Route>
