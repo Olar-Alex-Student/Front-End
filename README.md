@@ -44,7 +44,7 @@ Aceasta dezvoltă un site in care o persoana care are nevoie sa isi completeze u
 
 ## LOGIN:
 1. #### Pagina prezinta 2 campuri de completat si un buton.
-   - Cele 2 campri sunt cel de email si cel de parola.
+   - Cele 2 campuri sunt cel de email si cel de parola.
    - Dupa ce ai completat campurile si ai apasat pe butonul aferent se va salva token-ul si id-ul in sesiunea locala pentru a putea fi folosit pe viitor.
 
 
