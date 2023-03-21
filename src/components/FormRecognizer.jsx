@@ -12,17 +12,16 @@ export const FormRecognizer = () => {
     event.preventDefault();
 
     const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${userID}/utilityscan_document/`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
 
     try {
       const response = await axios.post(
         url,
-        userID,
-        imageFile,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
+        formData,
+        {headers: headers}
       );
       setFormResults(response.data);
     } catch (error) {
@@ -33,6 +32,9 @@ export const FormRecognizer = () => {
   function handleFileChange(event) {
     setImageFile(event.target.files[0]);
   }
+
+  const formData = new FormData();
+    formData.append('document', imageFile);
 
   if (!formResults) {
     return (
