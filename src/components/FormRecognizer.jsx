@@ -5,29 +5,24 @@ export const FormRecognizer = () => {
   const [formResults, setFormResults] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
+  const userID = sessionStorage.getItem('id');
+  const token = sessionStorage.getItem('token');
+
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const apiKey = '9dfb04b95c654556ab24d340f65cdee1';
-    const endpoint = 'https://bizonii-fr-front-end.cognitiveservices.azure.com/';
-    const formID = '0cb9b8b2-bde7-49f3-afc3-0fda71223fe7';
-    const formData = new FormData();
-    formData.append('file', imageFile);
+    const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${userID}/utilityscan_document/`;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
 
     try {
       const response = await axios.post(
-        `https://formrecognizer.appliedai.azure.com/studio/custommodel/projects/0cb9b8b2-bde7-49f3-afc3-0fda71223fe7/model-test`,
+        url,
         formData,
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Ocp-Apim-Subscription-Key': apiKey,
-            'Access-Control-Allow-Origin': '*'
-          }
-        }
+        {headers: headers}
       );
-
       setFormResults(response.data);
     } catch (error) {
       console.error(error);
@@ -37,6 +32,9 @@ export const FormRecognizer = () => {
   function handleFileChange(event) {
     setImageFile(event.target.files[0]);
   }
+
+  const formData = new FormData();
+    formData.append('document', imageFile);
 
   if (!formResults) {
     return (
