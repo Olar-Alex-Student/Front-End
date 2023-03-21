@@ -23,14 +23,13 @@ export const FillForm = () => {
     const [sectionsDisplay, setSectionsDisplay] = useState([]);
 
     function valueChange(event, id) {
-        console.log('valueChange')
         setSectionsDisplay(sections)
         Object.keys(values).forEach((key, index) => {
             if (key == id) {
                 const updatedValues = values
                 updatedValues[key] = event.target.value
                 setValues(updatedValues);
-                console.log(updatedValues)
+                console.log('valueChange', updatedValues)
             }
         });
         const updatedSections = JSON.parse(JSON.stringify(sectionsDisplay));

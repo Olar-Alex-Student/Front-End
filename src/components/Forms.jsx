@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Button, Table, Container, Modal, Alert } from 'react-bootstrap';
 import axios from "axios";
 import QRCode from 'react-qr-code';
+import { useNavigate } from "react-router-dom";
 
 export const Forms = () => {
+  const navigate = useNavigate();
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,13 +33,10 @@ export const Forms = () => {
   };
 
   async function handleGet() {
-    console.log(token)
     try {
       const response = await axios.get(url, { headers: headers });
-      console.log(response.data); // Handle successful login
+      console.log('success', response.data); // Handle successful login
       setTitles(response.data['form_list'])
-      // console.log(titles)
-      console.log('success')
     } catch (error) {
       console.log('error', error); // error.response.data.message
       setError(error.response.data.detail)
@@ -63,6 +63,16 @@ export const Forms = () => {
     let ignore = false;
 
     if (!ignore) handleGet()
+    return () => { ignore = true; }
+  }, []);
+
+  useEffect(() => {
+    let ignore = false;
+    if (!ignore) {
+      if(sessionStorage.getItem('loggedin') == 'false') {
+        navigate("/login")
+      }
+    }
     return () => { ignore = true; }
   }, []);
 

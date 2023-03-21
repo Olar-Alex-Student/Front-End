@@ -32,6 +32,7 @@ export const Login = () => {
       console.log(response.data);
       sessionStorage.setItem('token', response.data.access_token);
       sessionStorage.setItem('id', response.data.user_id);
+      sessionStorage.setItem('loggedin', 'true')
       alert("Login Success!");
       navigate("/forms");
     } catch (error) {

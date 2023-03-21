@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGroup, Tab, Alert } from 'react-bootstrap';
 import axios from "axios";
 import JoditEditor from 'jodit-react';
+import { useNavigate } from "react-router-dom";
 
 export const CreateForms = () => {
+  const navigate = useNavigate();
+
   const { form_id_url } = useParams()
 
   const [formID, setFromID] = useState("");
@@ -233,6 +236,16 @@ export const CreateForms = () => {
     }
   };
 
+  useEffect(() => {
+    let ignore = false;
+    if (!ignore) {
+      if(sessionStorage.getItem('loggedin') == 'false') {
+        navigate("/login")
+      }
+    }
+    return () => { ignore = true; }
+  }, []);
+
   return (
     <>
       <div className="container d-flex justify-content-center flex-column align-items-center p-4">
@@ -339,10 +352,10 @@ export const CreateForms = () => {
                 </Modal.Header>
                 <Modal.Body>What do you want to do with this form?</Modal.Body>
                 <Modal.Footer>
-                  <Button href="/" variant="secondary">
+                  <Button href="/" variant="secondary" onClick={handleClose}>
                     Go Back Home
                   </Button>
-                  <Button href={`/forms/fill/${formID}`} variant="primary">
+                  <Button href={`/forms/fill/${formID}`} variant="primary" onClick={handleClose}>
                     Fill Form
                   </Button>
                 </Modal.Footer>
