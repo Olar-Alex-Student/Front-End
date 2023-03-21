@@ -56,7 +56,7 @@ export const Signup = () => {
         </Alert>
         : null}
       <div className='box bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5'>
-        <div className='title d-flex justify-content-center text-secondary fw-bold p-4'>Signup</div>
+        <div className='title d-flex justify-content-center text-secondary fw-bold'>Signup</div>
         <Container>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
