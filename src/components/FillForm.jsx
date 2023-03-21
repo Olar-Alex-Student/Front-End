@@ -23,9 +23,8 @@ export const FillForm = () => {
     const [sectionsDisplay, setSectionsDisplay] = useState([]);
 
     function valueChange(event, id) {
-        console.log('valueChange-------------------------------------------------------------')
+        console.log('valueChange')
         setSectionsDisplay(sections)
-        console.log('----', sections[0]['text'])
         Object.keys(values).forEach((key, index) => {
             if (key == id) {
                 const updatedValues = values
@@ -73,7 +72,7 @@ export const FillForm = () => {
             setSectionsDisplay(response.data.sections)
         } catch (error) {
             console.log('error', error); // error.response.data.message
-            setError(error.message)
+            setError(error.response.data.detail)
             handleShowError()
         }
     };
@@ -92,9 +91,6 @@ export const FillForm = () => {
         const token = sessionStorage.getItem('token');
         const id = sessionStorage.getItem('id');
         const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${form_id_url}/submissions/`;
-        const headers = {
-            Authorization: `Bearer ${token}`
-        };
 
         const output_data = {
             "completed_dynamic_fields": values
@@ -102,15 +98,14 @@ export const FillForm = () => {
 
         console.log(output_data);
         try {
-            const response = await axios.post(url, output_data, { headers: headers });
+            const response = await axios.post(url, output_data);
             console.log(response.data); // Handle successful login
             alert("Fill Form Done!");
             navigate("/");
         } catch (error) {
             console.log('error', error);
-            setError(error.message)
+            setError(error.response.data.detail)
             handleShowError()
-            alert("Please Fill All The Input Fields");
         }
     }
 

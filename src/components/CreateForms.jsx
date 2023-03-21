@@ -100,7 +100,7 @@ export const CreateForms = () => {
       setSections(response.data.sections)
     } catch (error) {
       console.log('error', error); // error.response.data.message
-      setError(error.message)
+      setError(error.response.data.detail)
       handleShowError()
     }
   };
@@ -231,7 +231,7 @@ export const CreateForms = () => {
       }
     } catch (error) {
       console.log('error', error);
-      setError(error.message)
+      setError(error.response.data.detail)
       handleShowError()
     }
   };
@@ -332,7 +332,7 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); handleShow() }}>{create ? "Create" : "Edit"}!</Button>
+                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); if(error){ handleShow() } }}>{create ? "Create" : "Edit"}!</Button>
                 </div>
               </div>
 

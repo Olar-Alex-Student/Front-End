@@ -35,11 +35,11 @@ export const Forms = () => {
       const response = await axios.get(url, { headers: headers });
       console.log(response.data); // Handle successful login
       setTitles(response.data['form_list'])
-      console.log(titles)
+      // console.log(titles)
       console.log('success')
     } catch (error) {
       console.log('error', error); // error.response.data.message
-      setError(error.message)
+      setError(error.response.data.detail)
       handleShowError()
     }
   };
@@ -54,7 +54,7 @@ export const Forms = () => {
       window.location.reload(false);
     } catch (error) {
       console.log('error', error); // error.response.data.message
-      setError(error.message)
+      setError(error.response.data.detail)
       handleShowError()
     }
   };
@@ -105,7 +105,7 @@ export const Forms = () => {
                       <td></td>
                       <td>
                         <div className='d-flex gap-3 justify-content-end'>
-                          <Button onClick={() => { handleShow_qrcode(); setCurrentID(title['id']); setQrcode(`${window.location.href}/fill/${currentID}`) }} className="rounded-pill fw-bold btn-info btn-sm px-3">QR Code</Button>
+                          <Button onClick={() => { handleShow_qrcode(); setCurrentID(title['id']); setQrcode(`${window.location.href}/fill/${currentID}`) }} className="rounded-pill fw-bold btn-info btn-sm px-3">QR Code & Link</Button>
                           <Button href={`/forms/fill/${title['id']}`} className="rounded-pill fw-bold btn-success btn-sm px-3">Fill</Button>
                           <Button href={`/forms/edit/${title['id']}`} className="rounded-pill fw-bold btn-warning btn-sm px-3">Edit</Button>
                           <Button onClick={() => { handleShow(); setCurrentID(title['id']) }} className="rounded-pill fw-bold btn-danger btn-sm px-3">Delete</Button>
@@ -144,6 +144,7 @@ export const Forms = () => {
                   viewBox={`0 0 256 256`}
                 />
               </div>
+              <h5 className='mt-4'>{`${window.location.href}/fill/${currentID}`}</h5>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="primary" onClick={handleClose_qrcode}>
