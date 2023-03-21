@@ -14,6 +14,7 @@ import { NotFound } from "./components/NotFound";
 import { CreateForms } from "./components/CreateForms";
 import { FillForm } from "./components/FillForm";
 import { FormRecognizer } from "./components/FormRecognizer";
+import { Submissions } from "./components/Submissions";
 
 function App() {
 
@@ -106,6 +107,7 @@ function App() {
             <Route path='edit' element={<CreateForms />} />
             <Route path='edit/:form_id_url' element={<CreateForms />} />
           </Route>
+          <Route path='submissions/:form_id_url' element={<Submissions />} />
           <Route path='/upgrade' element={<Upgrade />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<> <Signup /> </>} />

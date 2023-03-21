@@ -115,6 +115,7 @@ export const Forms = () => {
                       <td></td>
                       <td>
                         <div className='d-flex gap-3 justify-content-end'>
+                          <Button href={`/submissions/${title['id']}`} className="rounded-pill fw-bold btn-primary btn-sm px-3">Submissions</Button>
                           <Button onClick={() => { handleShow_qrcode(); setCurrentID(title['id']); setQrcode(`${window.location.href}/fill/${currentID}`) }} className="rounded-pill fw-bold btn-info btn-sm px-3">QR Code & Link</Button>
                           <Button href={`/forms/fill/${title['id']}`} className="rounded-pill fw-bold btn-success btn-sm px-3">Fill</Button>
                           <Button href={`/forms/edit/${title['id']}`} className="rounded-pill fw-bold btn-warning btn-sm px-3">Edit</Button>
