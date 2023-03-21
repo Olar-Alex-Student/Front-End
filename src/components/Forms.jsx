@@ -83,7 +83,7 @@ export const Forms = () => {
           <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
             <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
             {(typeof error == 'string') ?
-              <p>{error}</p> : <p>Please fill all the fields.</p>
+              <p>{error}</p> : null
             }
           </Alert>
           : null}
