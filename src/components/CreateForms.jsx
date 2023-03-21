@@ -109,8 +109,7 @@ export const CreateForms = () => {
     let ignore = false;
 
     if (!ignore) {
-      if (window.location.pathname.includes('edit'))
-      {
+      if (window.location.pathname.includes('edit')) {
         handleEdit()
         setCreate(false)
       }
@@ -214,15 +213,13 @@ export const CreateForms = () => {
     }
     console.log(output_data)
     try {
-      if (create)
-      {
+      if (create) {
         const response = await axios.post(url, output_data, { headers: headers });
         console.log(response.data); // Handle successful login
         console.log(response.data.id);
         setFromID(response.data.id);
       }
-      else
-      {
+      else {
         const url_edit = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${form_id_url}`;
         const response = await axios.put(url_edit, output_data, { headers: headers });
         console.log(response.data); // Handle successful login
@@ -242,9 +239,9 @@ export const CreateForms = () => {
         {showError ?
           <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
             <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-            <p>
-              {error}
-            </p>
+            {(typeof error == 'string') ?
+              <p>{error}</p> : <p>Please fill all the fields.</p>
+            }
           </Alert>
           : null}
         <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
@@ -332,7 +329,7 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); if(error){ handleShow() } }}>{create ? "Create" : "Edit"}!</Button>
+                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); if (error) { handleShow() } }}>{create ? "Create" : "Edit"}!</Button>
                 </div>
               </div>
 

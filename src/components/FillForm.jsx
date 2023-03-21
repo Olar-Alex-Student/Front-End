@@ -37,8 +37,7 @@ export const FillForm = () => {
         sections.forEach((element, index) => {
             let newText = element['text']
             Object.keys(values).forEach((key, index_value) => {
-                if(values[key] != '' && newText.includes(`{${key}}`))
-                {
+                if (values[key] != '' && newText.includes(`{${key}}`)) {
                     newText = newText.replace(`{${key}}`, values[key])
                     updatedSections[index]['text'] = newText
                     setSectionsDisplay(updatedSections);
@@ -115,9 +114,9 @@ export const FillForm = () => {
                 {showError ?
                     <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
                         <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                        <p>
-                            {error}
-                        </p>
+                        {(typeof error == 'string') ?
+                            <p>{error}</p> : <p>Please fill all the fields.</p>
+                        }
                     </Alert>
                     : null}
                 <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
