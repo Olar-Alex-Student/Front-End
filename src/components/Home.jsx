@@ -24,10 +24,18 @@ export const Home = () => {
                 <span>Bizonii</span>
               </div>
               <p className="text-center text-secondary fs-5">Descopera cea mai buna metoda de a iti completa un formular in doar cateva minute! Da este chiar atat de simplu!</p>
-              <div className="buttons d-flex gap-5">
-                <Button href="/login" className="custom-button rounded-pill fw-bold">Login</Button>
-                <Button href="/signup"className="custom-button rounded-pill fw-bold">Sign Up</Button>
-              </div>
+              {
+                (sessionStorage.getItem('loggedin') == 'true') ?
+                  <div className="buttons d-flex gap-5">
+                    <Button href="/forms/create" className="custom-button rounded-pill fw-bold">Create</Button>
+                    <Button href="/forms" className="custom-button rounded-pill fw-bold">Browse</Button>
+                  </div>
+                  :
+                  <div className="buttons d-flex gap-5">
+                    <Button href="/login" className="custom-button rounded-pill fw-bold">Login</Button>
+                    <Button href="/signup" className="custom-button rounded-pill fw-bold">Sign Up</Button>
+                  </div>
+              }
             </div>
           </div> : null
       }
