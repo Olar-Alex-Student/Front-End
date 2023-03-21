@@ -133,15 +133,32 @@ export const FillForm = () => {
                                         <>
                                             {/* <ListGroup.Item key={index} action onClick={(event) => { loadDynamicField(event, index); setSelectedDynamic_field(index) }}>{element['label']}</ListGroup.Item> */}
                                             <Form.Label>{element['label']}</Form.Label>
-                                            {element['type'] == 'single-choice' ?
+                                            {(element['type'] == 'single-choice') &&
                                                 <Form.Select key={element['placeholder']} className="mb-3" onChange={(event) => valueChange(event, element['placeholder'])}>
                                                     <option>Select an option</option>
                                                     {element['options'].map((option, index) => (
                                                         <option value={option}>{option}</option>
                                                     ))}
                                                 </Form.Select>
-                                                : <Form.Control key={element['placeholder']} className="mb-3" type={element['type']} placeholder={element['label']} onChange={(event) => valueChange(event, element['placeholder'])} />
                                             }
+                                            {(element['type'] == 'multiple-choice') &&
+                                                <Form.Select key={element['placeholder']} className="mb-3" onChange={(event) => valueChange(event, element['placeholder'])}>
+                                                    <option>Select an option</option>
+                                                    {element['options'].map((option, index) => (
+                                                        <option value={option}>{option}</option>
+                                                    ))}
+                                                </Form.Select>
+                                            }
+                                            {(element['type'] == 'decimal') &&
+                                                <Form.Control key={element['placeholder']} className="mb-3" type='number' step="0.01" placeholder={element['label']} onChange={(event) => valueChange(event, element['placeholder'])} />
+                                            }
+                                            {(element['type'] == 'number') &&
+                                                <Form.Control key={element['placeholder']} className="mb-3" type={element['type']} placeholder={element['label']} onChange={(event) => valueChange(event, element['placeholder'])} />
+                                            }
+                                            {(element['type'] == 'date' || element['type'] == 'text') &&
+                                                <Form.Control key={element['placeholder']} className="mb-3" type={element['type']} placeholder={element['label']} onChange={(event) => valueChange(event, element['placeholder'])} />
+                                            }
+
                                         </>
                                     ))}
 

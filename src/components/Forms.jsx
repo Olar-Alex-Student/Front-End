@@ -28,9 +28,7 @@ export const Forms = () => {
   const token = sessionStorage.getItem('token');
   const id = sessionStorage.getItem('id');
   const url = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/`;
-  const headers = {
-    Authorization: `Bearer ${token}`
-  };
+  const headers = { Authorization: `Bearer ${token}` };
 
   async function handleGet() {
     try {
