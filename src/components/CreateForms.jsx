@@ -229,6 +229,7 @@ export const CreateForms = () => {
         console.log(response.data.id);
         setFromID(response.data.id);
       }
+      handleShow()
     } catch (error) {
       console.log('error', error);
       setError(error.response.data.detail)
@@ -342,7 +343,7 @@ export const CreateForms = () => {
               </div>
               <div className="col-lg-12">
                 <div className='d-flex align-items-center justify-content-center'>
-                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e); if (error) { handleShow() } }}>{create ? "Create" : "Edit"}!</Button>
+                  <Button className='custom-button custom-button-inverted medium-button-size rounded-pill fw-bold' onClick={(e) => { handleSubmit(e) }}>{create ? "Create" : "Edit"}!</Button>
                 </div>
               </div>
 
