@@ -15,17 +15,26 @@ export const SignUpForm = () => {
   const [accountType, setAccountType] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
+  const [fiscalCode, setFiscalCode] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const dataa = {
-        "name": name,
-        "email": email,
-        "password": password,
-        "account_type": accountType,
-        "address": address
-      }
+          "name": name,
+          "email": email,
+          "password": password,
+          "account_type": accountType,
+          "address": address,
+          "fiscal_code": fiscalCode
+        }
+        // const dataa = {
+        //   "name": "Vizitiu wfdgdtdhValentin",
+        //   "email": "pogg112344grgrgrgrgrgrers1234@pogmail.com",
+        //   "password": "123dfdggr4",
+        //   "account_type": "individual",
+        //   "address": "7353 South rgrgrgrgrSt. Braintree, MA 02184"
+        // }
       const response = await axios.post(url, dataa);
       console.log(response.data); // Handle successful login
       console.log(dataa)
@@ -66,11 +75,24 @@ export const SignUpForm = () => {
             <div className="input-group mb-4">
               <Form.Select value={accountType} onChange={(e) => setAccountType(e.target.value)}>
                 <option>Select an Option</option>
-                <option>Individual</option>
-                <option>Company</option>
-                <option>Public Institution</option>
+                <option value="individual">Individual</option>
+                <option value="company">Company</option>
+                <option value="public_institution">Public Institution</option>
               </Form.Select>
             </div>
+        </div>
+        <div>
+        {
+          (accountType == "company" || accountType == "public_institution") ? <>
+            <Form.Label>
+            <h3 className="text-center text-secondary mb-0">Fiscal Code</h3>
+            </Form.Label>
+            <Form.Control className="mb-3" type="number" placeholder="Fiscal Code" value={fiscalCode} onChange={(e) => setFiscalCode(e.target.value)} />
+          </> : null
+        }
+        </div>
+        <div className="form-group">
+
         </div>
         <div className="form-group">
           <Form.Label>
