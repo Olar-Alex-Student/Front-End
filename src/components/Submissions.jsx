@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 export const Submissions = () => {
   const navigate = useNavigate();
   const { form_id_url } = useParams()
+  const [currentID, setCurrentID] = useState('');
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
@@ -27,6 +32,39 @@ export const Submissions = () => {
       const response = await axios.get(url, { headers: headers });
       console.log('success', response.data); // Handle successful login
       setSubmissions(response.data)
+    } catch (error) {
+      console.log('error', error); // error.response.data.message
+      setError(error.response.data.detail)
+      handleShowError()
+    }
+  };
+
+  async function handlePDF(submissionID) {
+    const url_PDF = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${form_id_url}/submissions/${submissionID}/pdf`;
+    const headers_PDF = {
+      Authorization: `Bearer ${token}`
+    };
+    try {
+      const response = await axios.get(url_PDF, { headers: headers_PDF, responseType: 'arraybuffer' });
+      console.log('success', response.data); // Handle successful login
+
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      window.open(URL.createObjectURL(blob));
+
+    } catch (error) {
+      console.log('error', error); // error.response.data.message
+      setError(error.response.data.detail)
+      handleShowError()
+    }
+  };
+
+  async function handleDelete() {
+    const url_delete = `https://bizoni-backend-apis.azurewebsites.net/api/v1/users/${id}/forms/${form_id_url}/submissions/${currentID}`;
+    try {
+      const response = await axios.delete(url_delete, { headers: headers });
+      console.log(response.data); // Handle successful login
+      console.log('deleted')
+      window.location.reload(false);
     } catch (error) {
       console.log('error', error); // error.response.data.message
       setError(error.response.data.detail)
@@ -92,6 +130,12 @@ export const Submissions = () => {
                             <td>{submission["completed_dynamic_fields"][key]}</td>
                           )
                         })}
+                        <td>
+                          <div className='d-flex gap-3 justify-content-end'>
+                            <Button onClick={() => { handlePDF(submission['id']) }} className="rounded-pill fw-bold btn-primary btn-sm px-3">View PDF</Button>
+                            <Button onClick={() => { handleShow(); setCurrentID(submission['id']) }} className="rounded-pill fw-bold btn-danger btn-sm px-3">Delete</Button>
+                          </div>
+                        </td>
                       </tr>
                     ))
                   }
@@ -99,6 +143,20 @@ export const Submissions = () => {
               </Table>
               : <h1 className='d-flex text-primary gap-3 justify-content-center py-5'>This form does not have any submissions yet. :(</h1>}
           </Container>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Delete submission</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Are you sure that you want to delete this submission?</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Changed my mind
+              </Button>
+              <Button variant="primary" onClick={(e) => { handleClose(e); handleDelete() }}>
+                Delete it!
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </>
