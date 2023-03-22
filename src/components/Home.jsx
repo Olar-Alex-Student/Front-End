@@ -18,8 +18,8 @@ export const Home = () => {
       }
       {
         !toggle ?
-          <div className="container d-flex justify-content-center p-4">
-            <div className="box bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
+          <div className="component-container container d-flex justify-content-center">
+            <div className="box bg-primary d-flex justify-content-center align-items-center flex-column gap-5">
               <div className="title text center text-secondary fw-bold">
                 <span>Bizonii</span>
               </div>

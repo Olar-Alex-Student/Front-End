@@ -249,7 +249,7 @@ export const CreateForms = () => {
 
   return (
     <>
-      <div className="container d-flex justify-content-center flex-column align-items-center p-4">
+      <div className="component-container container d-flex justify-content-center flex-column align-items-center">
         {showError ?
           <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
             <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -258,7 +258,7 @@ export const CreateForms = () => {
             }
           </Alert>
           : null}
-        <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
+        <div className="box box-size-forms bg-primary d-flex justify-content-center align-items-center flex-column gap-5">
           <div className="title text-secondary fw-bold">
             <span>{create ? "Create" : "Edit"} Form</span>
           </div>

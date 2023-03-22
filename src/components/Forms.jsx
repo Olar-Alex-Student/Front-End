@@ -75,7 +75,7 @@ export const Forms = () => {
 
   return (
     <>
-      <div className="container d-flex justify-content-center flex-column align-items-center p-4">
+      <div className="component-container container d-flex justify-content-center flex-column align-items-center">
         {showError ?
           <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
             <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -84,7 +84,7 @@ export const Forms = () => {
             }
           </Alert>
           : null}
-        <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
+        <div className="box box-size-forms bg-primary d-flex justify-content-center align-items-center flex-column gap-5">
           <div className="title text-secondary fw-bold">
             <span>My Forms</span>
           </div>
@@ -111,7 +111,7 @@ export const Forms = () => {
                     <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, similique.</td> */}
                       <td></td>
                       <td>
-                        <div className='d-flex gap-3 justify-content-end'>
+                        <div className='d-flex gap-3 justify-content-end flex-wrap'>
                           <Button href={`/submissions/${title['id']}`} className="rounded-pill fw-bold btn-primary btn-sm px-3">Submissions</Button>
                           <Button onClick={() => { handleShow_qrcode(); setCurrentID(title['id']); setQrcode(`${window.location.href}/fill/${title['id']}`) }} className="rounded-pill fw-bold btn-info btn-sm px-3">QR Code & Link</Button>
                           <Button href={`/forms/fill/${title['id']}`} className="rounded-pill fw-bold btn-success btn-sm px-3">Fill</Button>

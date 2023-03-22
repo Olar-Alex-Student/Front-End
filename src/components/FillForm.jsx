@@ -110,7 +110,7 @@ export const FillForm = () => {
 
     return (
         <>
-            <div className="container d-flex justify-content-center flex-column align-items-center p-4">
+            <div className="component-container container d-flex justify-content-center flex-column align-items-center">
                 {showError ?
                     <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
                         <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -119,7 +119,7 @@ export const FillForm = () => {
                         }
                     </Alert>
                     : null}
-                <div className="box box-size-forms bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5">
+                <div className="box box-size-forms bg-primary sm-p-2 d-flex justify-content-center align-items-center flex-column gap-5">
                     <div className="title text-secondary fw-bold">
                         <span>Fill Form</span>
                     </div>

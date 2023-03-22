@@ -52,7 +52,7 @@ export const Login = () => {
   }, []);
 
   return (
-    <div className="container d-flex justify-content-center flex-column align-items-center p-4">
+    <div className="component-container container d-flex justify-content-center flex-column align-items-center">
       {showError ?
         <Alert className='sticky-top' variant="danger" onClose={() => setShowError(false)} dismissible>
           <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -61,7 +61,7 @@ export const Login = () => {
           }
         </Alert>
         : null}
-      <div className='box bg-primary p-5 d-flex justify-content-center align-items-center flex-column gap-5'>
+      <div className='box bg-primary d-flex justify-content-center align-items-center flex-column gap-5'>
         <div className='title d-flex justify-content-center text-secondary fw-bold'>
           Login
         </div>
