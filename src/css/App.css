@@ -10881,7 +10881,7 @@ body, #root {
   }
   .box {
     border-radius: 0px;
-    padding: 0px;
+    padding: 5px;
     padding-bottom: 20px;
   }
   .component-container {
