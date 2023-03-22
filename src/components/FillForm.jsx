@@ -4,6 +4,7 @@ import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGro
 import axios from "axios";
 import JoditEditor from 'jodit-react';
 import { useNavigate } from "react-router-dom";
+import ReactHtmlParser from 'react-html-parser'; 
 
 export const FillForm = () => {
     const { form_id_url } = useParams()
@@ -165,7 +166,7 @@ export const FillForm = () => {
                                 </div>
                                 <div className="col-lg-6 mb-3 bg-white rounded-2 border border-danger-subtle">
                                     {sectionsDisplay.map((element, index) => (
-                                        <p>{element['text']}</p>
+                                        <div> { ReactHtmlParser (element['text']) } </div>
                                     ))}
                                 </div>
                                 <div className="col-lg-12">
