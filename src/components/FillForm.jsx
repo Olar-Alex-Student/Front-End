@@ -4,7 +4,7 @@ import { Navbar, Nav, Button, Table, Container, Modal, InputGroup, Form, ListGro
 import axios from "axios";
 import JoditEditor from 'jodit-react';
 import { useNavigate } from "react-router-dom";
-import ReactHtmlParser from 'react-html-parser'; 
+import ReactHtmlParser from 'html-react-parser'; 
 
 export const FillForm = () => {
     const { form_id_url } = useParams()
