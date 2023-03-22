@@ -34,7 +34,7 @@ export const Login = () => {
       sessionStorage.setItem('id', response.data.user_id);
       sessionStorage.setItem('loggedin', 'true')
       alert("Login Success!");
-      navigate("/forms");
+      window.location.reload(false);
     } catch (error) {
       console.log('error', error);
       console.log(error.response.data.detail)
@@ -42,6 +42,14 @@ export const Login = () => {
       handleShowError()
     }
   };
+
+  useEffect(() => {
+    let ignore = false;
+    if (!ignore) {
+      if (sessionStorage.getItem('loggedin') == 'true') navigate("/forms");
+    }
+    return () => { ignore = true; }
+  }, []);
 
   return (
     <div className="container d-flex justify-content-center flex-column align-items-center p-4">
