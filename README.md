@@ -3,13 +3,13 @@
  
 Aplicația a fost realizată folosind React + Vite, un framework accesibil ce folosește Java Script.
 
-Aceasta dezvoltă un site in care o persoana care are nevoie sa isi completeze un formular sa o faca in cel mai simplu mod posibil.
+Aceasta dezvoltă un site în care o persoană care are nevoie să își completeze un formular să o faca în cel mai simplu mod posibil.
 
 ### Comanda pe care o folosim pentru a menține serverul pornit este:
 ```"npm run dev"```
 
 
-## Aplicația prezinta o pagina principala si 3 pagini secundare:
+## Aplicația prezintă o pagină principală și 3 pagini secundare:
 1. ### HOME PAGE
 2. ### CREATE
 3. ### BROWSE
@@ -17,39 +17,39 @@ Aceasta dezvoltă un site in care o persoana care are nevoie sa isi completeze u
 
 
 ## HOME PAGE:
-1. #### Pagina te intampina cu un design minimalist, format dintr-un buton cu logo-ul echipei care iti ofera 2 optiuni:
-   - Butonul de Sign-Up care te redirectioneaza pe pagina de inregistrare a site-ului.
-   - Butonul de Login care te redirectioneaza pe pagina de autentificare a site-ului.
+1. #### Pagina te întampină cu un design minimalist, format dintr-un buton cu logo-ul echipei care îți oferă 2 opțiuni:
+   - Butonul de Sign-Up care te redirecționează pe pagina de înregistrare a site-ului.
+   - Butonul de Login care te redirecționează pe pagina de autentificare a site-ului.
 
 
 ## CREATE:
-1. #### Pagina prezinta un template cu posibilitatea de a iti personaliza cum doresti formularul. Avand urmatoarele posibilitati:
+1. #### Pagina prezintă un template cu posibilitatea de a îți personaliza cum dorești formularul. Având următoarele posibilități:
    - Titlu.
-   - Campuri dinamice, pentru a introduce doar detaliile necesare.
-   - Impartirea forumularului in mai multe sectiuni.
-   - Selectarea numarului de zile pana formularul se va sterge din baza de date.
-   - Posibilitatea de a introduce continut in formular.
-   - Selectarea metodei prin care poti scana o poza si introduce mai usor datele in formular.
+   - Câmpuri dinamice, pentru a introduce doar detaliile necesare.
+   - Împarțirea forumularului în mai multe secțiuni.
+   - Selectarea numărului de zile până formularul se va șterge din baza de date.
+   - Posibilitatea de a introduce conținut în formular.
+   - Selectarea metodei prin care poți scana o poză și introduce mai ușor datele în formular.
    
 
 
 ## BROWSE:
-1. #### Pagina are 2 functionalitati, cea de vizualizare a formularelor create pe acel cont si un buton care te redirectioneaza pe pagina de creare cont.
+1. #### Pagina are 2 functionalități, cea de vizualizare a formularelor create pe acel cont și un buton care te redirecționează pe pagina de creare cont.
    - Vizualizare formularelor vine cu 4 butoane separate, <b>QR Code</b>, <b>Fill</b>, <b>Edit</b>, <b>Delete</b>.
-   -- Butonul <b>QR Code</b> iti genereaza un cod QR cu care poti accesa PDF-ul formularului mult mai usor.
-   -- Butonul <b>Fill</b> te redirectioneaza pe pagina de Fill Form unde poti completa formularul cu datele tale.
-   -- Butonul <b>Edit</b> iti va da posibilitatea sa schimbi anumite date pe care le-ai introdus.
-   -- Butonul <b>Delete</b> va sterge acel formular.
+   -- Butonul <b>QR Code</b> îți generează un cod QR cu care poți accesa PDF-ul formularului mult mai ușor.
+   -- Butonul <b>Fill</b> te redirecționează pe pagina de Fill Form unde poți completa formularul cu datele tale.
+   -- Butonul <b>Edit</b> îți va da posibilitatea să schimbi anumite date pe care le-ai introdus.
+   -- Butonul <b>Delete</b> va șterge acel formular.
 
 
 ## LOGIN:
-1. #### Pagina prezinta 2 campuri de completat si un buton.
-   - Cele 2 campuri sunt cel de email si cel de parola.
-   - Dupa ce ai completat campurile si ai apasat pe butonul aferent se va salva token-ul si id-ul in sesiunea locala pentru a putea fi folosit pe viitor.
+1. #### Pagina prezintă 2 câmpuri de completat și un buton.
+   - Cele 2 câmpuri sunt cel de email și cel de parola.
+   - După ce ai completat câmpurile și ai apăsat pe butonul aferent se va salva token-ul și id-ul în sesiunea locală pentru a putea fi folosit pe viitor.
 
 
 ## Workflow:
-- In prima instanta un utilizator nou se va inregistra pe site.
-- Dupa care se va autentifica pe site.
-- In cele ce urmeaza el va avea doar posibilitatea de a isi crea un formular in care sa isi stabileasca datele pe care le doreste in acel formular, continutul acestiuia si modul prin care poate incarca o imagine pentru a putea fi scanata, fiind un proces de completare a formularului automata si mult mai rapida.
-- Dupa ce formularul este completat cu datele necesare, utilizatorul poate sa il descarce in format PDF sau sa il transmita oricui prin codul QR generat automat de catre site.
+- În prima instanță un utilizator nou se va înregistra pe site.
+- După care se va autentifica pe site.
+- În cele ce urmează el va avea doar posibilitatea de a își crea un formular în care să își stabilească datele pe care le dorește în acel formular, conținutul acestuia și modul prin care poate încarca o imagine pentru a putea fi scanată, fiind un proces de completare a formularului automată și mult mai rapidă.
+- După ce formularul este completat cu datele necesare, utilizatorul poate să îl descarce în format PDF sau să îl transmită oricui prin codul QR generat automat de către site.
